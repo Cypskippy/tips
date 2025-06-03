@@ -33,3 +33,61 @@ jobs:
           git add _pages/ || true
           git commit -m "chore(content): auto-update $(date -u +%F)" || true
           git push origin HEAD:main
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │          FICHIER: /.github/workflows/generate.yml                       │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+name: Génération et Déploiement Automatique
+
+# On déclenche la génération chaque nuit à 03h00 (Serveur UTC)
+on:
+  schedule:
+    - cron: "0 2 * * *"   # 2h UTC = 3h CET (à ajuster si tu changes de fuseau)
+  workflow_dispatch:     # permet de lancer à la demande depuis l’onglet Actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. On récupère le code
+    - name: Checkout du repo
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: true
+
+    # 2. On installe Python (pour ton script generate.py)
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    # 3. On installe les dépendances
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. On exécute ton script de génération de contenu
+    - name: Générer le contenu (_pages/*.md)
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python scripts/generate.py
+
+    # 5. On commit et push les nouveaux fichiers générés
+    - name: Commit & push des pages générées
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --local user.email "github-action-bot@users.noreply.github.com"
+        git config --local user.name  "Content-Bot"
+        git add _pages/ || true
+        git diff --quiet && echo "Aucun changement" || git commit -m "chore(content): auto-update $(date -u +%F)"
+        git push origin HEAD:main
+
+    # 6. On ping Google pour le sitemap
+    - name: Ping Google pour le sitemap
+      run: |
+        curl -I "https://www.google.com/ping?sitemap=https://cypskippy.github.io/Tips/sitemap.xml"
+
