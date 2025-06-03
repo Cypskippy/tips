@@ -42,11 +42,10 @@ def build_related(slug: str) -> str:
     if not others:
         return ""
     links = random.sample(others, k=min(3, len(others)))
-    bullets = "
-".join(
-        f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
-    )
-    return f"
+   bullets = "\\n".join(
+    f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
+)
+return f"\\n\\n## Articles connexes\\n{bullets}"
 
 ## Articles connexes
 {bullets}"
@@ -62,9 +61,7 @@ A:… sur deux lignes, répète pour la 2ᵉ question."
     pairs = [(qa_lines[i][2:].strip(), qa_lines[i+1][2:].strip()) for i in range(0, len(qa_lines), 2)]
 
     # Markdown
-    md = "
-
-## FAQ
+    md = "\\n\\n## FAQ\\n" + "\\n\\n".join(f"**{q}**\\n: {a}" for q, a in pairs)
 " + "
 
 ".join(f"**{q}**
