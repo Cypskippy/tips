@@ -1,0 +1,26 @@
+name: Generate & Deploy Articles
+on:
+  schedule:
+    - cron: "0 3 * * *"   # 03 h CET chaque nuit
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Generate content
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python scripts/generate.py
+      - name: Commit & push new articles
+        run: |
+          git config --global user.email "bot@github"
+          git config --global user.name  "Content‑Bot"
+          git add content/ || true
+          git commit -m "chore(content): auto‑update $(date -u +%F)" || true
+          git push
