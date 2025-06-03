@@ -9,3 +9,4 @@ permalink: /:title/
 collections:
   pages:
     output: true
+    permalink: /:name/
