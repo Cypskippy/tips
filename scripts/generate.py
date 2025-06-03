@@ -19,7 +19,7 @@ from slugify import slugify
 
 # --- Configuration ---------------------------------------------------------
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONTENT_DIR = ROOT / "content"
+CONTENT_DIR = ROOT / "_pages"
 KEYWORDS_CSV = ROOT / "keywords.csv"
 MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 BATCH = int(os.getenv("BATCH", 5))
