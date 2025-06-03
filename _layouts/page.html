@@ -1,0 +1,95 @@
+<!-- ┌─────────────────────────────────────────────────────────────────────────┐ -->
+<!-- │                 FICHIER: /_layouts/page.html                            │ -->
+<!-- └─────────────────────────────────────────────────────────────────────────┘ -->
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'fr-FR' }}">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Titre dynamique “Page Title | Site Title” -->
+  <title>{{ page.title }} | {{ site.title }}</title>
+
+  <!-- Balises SEO (plugin jekyll-seo-tag) -->
+  {% seo %}
+
+  <!-- =========== Google AdSense snippet (insérer ton ID client) =========== -->
+  <!-- Remplace CA-PUB-XXXXXXXXXXXXXXX par ton identifiant AdSense réel -->
+  <script data-ad-client="ca-pub-XXXXXXXXXXXXXXX" async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+  </script>
+  <!-- ======================================================================== -->
+
+  <!-- (Optionnel) Ton CSS perso ou un reset minimal -->
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer { background: #f4f4f4; padding: 10px 20px; }
+    main { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+    h1 { margin-bottom: 0.5em; }
+    .ad-container-top, .ad-container-bottom {
+      text-align: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ───── Header du site ───── -->
+  <header>
+    <h2><a href="{{ site.baseurl }}/" style="text-decoration:none; color:inherit;">{{ site.title }}</a></h2>
+  </header>
+
+  <main>
+    <article>
+      <!-- ─── Titre de la page (H1) ─── -->
+      <h1>{{ page.title }}</h1>
+
+      <!-- ───── Bloc pub #1 (juste en dessous du titre) ───── -->
+      <div class="ad-container-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+             data-ad-slot="YYYYYYYYYY"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+      <!-- ─── Contenu Markdown généré par Jekyll (de tes fichiers .md) ─── -->
+      {{ content }}
+
+      <!-- ───── Bloc pub #2 (en bas, après tout le contenu) ───── -->
+      <div class="ad-container-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+             data-ad-slot="ZZZZZZZZZZ"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </article>
+  </main>
+
+  <!-- (Optionnel) SI tu veux injecter une pub au milieu du contenu, ci-dessous -->
+  <!-- (Expose /_layouts/ads-inject.js – voir section 3.1.2) -->
+  {%- include ads-inject.js -%}
+
+  <!-- ───── Footer du site ───── -->
+  <footer>
+    <p style="font-size:0.9em; text-align:center; color:#666;">
+      &copy; {{ "now" | date: "%Y" }} {{ site.title }} • Tous droits réservés
+    </p>
+  </footer>
+</body>
+</html>
