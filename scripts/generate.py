@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Generate or update markdown articles from keywords.csv
+"""Generate or update markdown articles from keywords.csv.
+Adds:
 - Internal linking (Articles connexes)
-- AI‑generated FAQ + JSON‑LD Schema
-- Stub for MaPrimeRénov' barèmes refresh
+- AI‑generated FAQ + JSON‑LD Schema.org block
+- Ready for nightly GitHub Actions cron
 """
+
 import csv
 import datetime
 import json
@@ -15,7 +17,7 @@ import frontmatter
 import openai
 from slugify import slugify
 
-# ---------- Config ---------------------------------------------------------
+# --- Configuration ---------------------------------------------------------
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 KEYWORDS_CSV = ROOT / "keywords.csv"
@@ -23,10 +25,10 @@ MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 BATCH = int(os.getenv("BATCH", 5))
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-# ---------- Helpers --------------------------------------------------------
+# --- Helpers ---------------------------------------------------------------
 
 def llm(prompt: str) -> str:
-    """Call the LLM and return plain text."""
+    """Query the LLM and return plain text."""
     resp = openai.chat.completions.create(
         model=MODEL,
         messages=[{"role": "user", "content": prompt}],
@@ -36,7 +38,7 @@ def llm(prompt: str) -> str:
 
 
 def build_related(slug: str) -> str:
-    """Return a markdown section listing up to 3 internal links."""
+    """Return a markdown section with up to 3 internal links."""
     others = [p.stem for p in CONTENT_DIR.glob("*.md") if p.stem != slug]
     if not others:
         return ""
@@ -53,13 +55,13 @@ def build_related(slug: str) -> str:
 
 
 def build_faq(keyword: str) -> tuple[str, str]:
-    """Return (markdown FAQ, JSON‑LD FAQPage)."""
-    qa_prompt = (
+    """Generate a two‑question FAQ (markdown + JSON‑LD)."""
+    prompt = (
         "Donne deux questions fréquentes très courtes (max 12 mots) avec leur réponse concise (1 phrase) "
-        f"au sujet : {keyword}. Format : Q:question puis A:réponse sur la ligne suivante. Répète pour la 2ᵉ question."
+        f"au sujet : {keyword}. Format : Q:question puis A:réponse sur la ligne suivante. Répète pour la 2ᵉ question."
     )
-    qa_raw = llm(qa_prompt)
-    lines = [l.strip() for l in qa_raw.splitlines() if l.strip()]
+    raw = llm(prompt)
+    lines = [l.strip() for l in raw.splitlines() if l.strip()]
     pairs: list[tuple[str, str]] = []
     for i in range(0, len(lines), 2):
         if i + 1 < len(lines):
@@ -70,7 +72,7 @@ def build_faq(keyword: str) -> tuple[str, str]:
     if not pairs:
         return "", ""
 
-    md_part = "
+    md = "
 
 ## FAQ
 " + "
@@ -91,20 +93,18 @@ def build_faq(keyword: str) -> tuple[str, str]:
         ],
     }
     json_ld = (
-        "
+        f'
 
-<script type=\"application/ld+json\">
-"
-        + json.dumps(schema, ensure_ascii=False, indent=2)
-        + "
+<script type="application/ld+json">
+{json.dumps(schema, ensure_ascii=False, indent=2)}
 </script>
-"
+'
     )
-    return md_part, json_ld
+    return md, json_ld
 
-# ---------- Core -----------------------------------------------------------
+# --- Core generation -------------------------------------------------------
 
-def generate_article(keyword: str):
+def generate_article(keyword: str) -> None:
     slug = slugify(keyword)[:90]
     path = CONTENT_DIR / f"{slug}.md"
     today = datetime.date.today().isoformat()
@@ -118,23 +118,23 @@ def generate_article(keyword: str):
         post["date"] = today
     post["last_updated"] = today
 
-    # Main body
-    outline = llm(
+    # Main body (500 words approx.)
+    body = llm(
         "Rédige un article de blog de 500 mots en français, structuré (h2/h3), avec une introduction claire, "
-        "un tableau si pertinent, et une conclusion pratique. Sujet : " + keyword
+        "un tableau si pertinent, et une conclusion pratique. Sujet : " + keyword
     )
 
     faq_md, faq_json = build_faq(keyword)
     related_md = build_related(slug)
 
-    post.content = outline + faq_md + related_md + faq_json
+    post.content = body + faq_md + related_md + faq_json
 
     CONTENT_DIR.mkdir(exist_ok=True)
     frontmatter.dump(post, path, sort_keys=False)
-    print(f"✅ {slug} mis à jour")
+    print(f"✅ {slug}")
 
 
-def main():
+def main() -> None:
     with KEYWORDS_CSV.open() as f:
         keywords = [row[0].strip() for row in csv.reader(f) if row and row[0].strip()]
 
