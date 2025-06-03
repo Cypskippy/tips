@@ -86,8 +86,9 @@ jobs:
         git diff --quiet && echo "Aucun changement" || git commit -m "chore(content): auto-update $(date -u +%F)"
         git push origin HEAD:main
 
-    # 6. On ping Google pour le sitemap
-    - name: Ping Google pour le sitemap
-      run: |
-        curl -I "https://www.google.com/ping?sitemap=https://cypskippy.github.io/Tips/sitemap.xml"
-
+    # 6. On prévient Google que le sitemap a été mis à jour
+      - name: Ping Google pour le sitemap
+        run: |
+          curl -I "https://cypskippy.github.io/Tips/sitemap.xml" \
+            --output /dev/null --silent --head
+    
