@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cypskippy.github.io/Tips/sitemap.xml
