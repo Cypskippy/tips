@@ -26,7 +26,6 @@ BATCH = int(os.getenv("BATCH", 5))
 openai.api_key = os.environ.get("OPENAI_API_KEY", "")
 
 # --- Helpers ---------------------------------------------------------------
-
 def llm(prompt: str) -> str:
     """Query the LLM and return plain text."""
     resp = openai.chat.completions.create(
@@ -36,23 +35,16 @@ def llm(prompt: str) -> str:
     )
     return resp.choices[0].message.content.strip()
 
-
 def build_related(slug: str) -> str:
     """Return a markdown section with up to 3 internal links."""
     others = [p.stem for p in CONTENT_DIR.glob("*.md") if p.stem != slug]
     if not others:
         return ""
     links = random.sample(others, k=min(3, len(others)))
-    bullets = "
-".join([
+    bullets = "\n".join([
         f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
     ])
-    return f"
-
-## Articles connexes
-{bullets}
-"
-
+    return f"\n\n## Articles connexes\n{bullets}\n"
 
 def build_faq(keyword: str) -> (str, str):
     """Generate a two-question FAQ (markdown + JSON-LD)."""
@@ -73,14 +65,8 @@ def build_faq(keyword: str) -> (str, str):
         return "", ""
 
     # Build Markdown part
-    faq_md = "
-
-## FAQ
-"
-    faq_md += "
-
-".join([f"**{q}**
-: {a}" for q, a in pairs])
+    faq_md = "\n\n## FAQ\n"
+    faq_md += "\n\n".join([f"**{q}**\n: {a}" for q, a in pairs])
 
     # Build JSON-LD
     schema = {
@@ -95,19 +81,13 @@ def build_faq(keyword: str) -> (str, str):
             "acceptedAnswer": {"@type": "Answer", "text": a}
         })
     faq_json = (
-        "
-
-<script type=\"application/ld+json\">
-"
+        "\n\n<script type=\"application/ld+json\">\n"
         + json.dumps(schema, ensure_ascii=False, indent=2)
-        + "
-</script>
-"
+        + "\n</script>\n"
     )
     return faq_md, faq_json
 
 # --- Core generation -------------------------------------------------------
-
 def generate_article(keyword: str) -> None:
     slug = slugify(keyword)[:90]
     path = CONTENT_DIR / f"{slug}.md"
@@ -140,7 +120,6 @@ def generate_article(keyword: str) -> None:
     frontmatter.dump(post, path, sort_keys=False)
     print(f"✅ {slug} mis à jour")
 
-
 def main() -> None:
     # Read all keywords
     with KEYWORDS_CSV.open() as f:
@@ -154,7 +133,6 @@ def main() -> None:
             pending.append(kw)
     for kw in pending[:BATCH]:
         generate_article(kw)
-
 
 if __name__ == "__main__":
     main()
