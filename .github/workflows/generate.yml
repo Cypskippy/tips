@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # 03 h CET chaque nuit
+    - cron: "0 3 * * *"   # 03 h CET chaque nuit
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python scripts/generate.py
-            - name: Commit & push new articles
+      - name: Commit & push new articles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
