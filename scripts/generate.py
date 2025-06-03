@@ -43,15 +43,10 @@ def build_related(slug: str) -> str:
     if not others:
         return ""
     links = random.sample(others, k=min(3, len(others)))
-    bullets = "
-".join([
+    bullets = "\n".join([
         f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
     ])
-    return f"
-
-## Articles connexes
-{bullets}
-"
+    return f"\n\n## Articles connexes\n{bullets}\n"
 
 
 def build_faq(keyword: str) -> (str, str):
@@ -74,14 +69,8 @@ def build_faq(keyword: str) -> (str, str):
         return "", ""
 
     # Build Markdown part
-    faq_md = "
-
-## FAQ
-"
-    faq_md += "
-
-".join([f"**{q}**
-: {a}" for q, a in pairs])
+    faq_md = "\n\n## FAQ\n"
+    faq_md += "\n\n".join([f"**{q}**\n: {a}" for q, a in pairs])
 
     # Build JSON-LD
     schema = {
@@ -96,14 +85,9 @@ def build_faq(keyword: str) -> (str, str):
             "acceptedAnswer": {"@type": "Answer", "text": a}
         })
     faq_json = (
-        "
-
-<script type=\"application/ld+json\">
-"
+        "\n\n<script type=\"application/ld+json\">\n"
         + json.dumps(schema, ensure_ascii=False, indent=2)
-        + "
-</script>
-"
+        + "\n</script>\n"
     )
     return faq_md, faq_json
 
