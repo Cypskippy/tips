@@ -1,0 +1,11 @@
+# Site settings
+title: "Cyprien – Programmatic SEO"
+lang: fr-FR
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+permalink: /:title/
+collections:
+  pages:
+    output: true
