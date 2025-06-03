@@ -86,7 +86,9 @@
   </main>
 
   <!-- ─── Injection “au milieu” du contenu (après 3ᵉ paragraphe) ─── -->
-  {%- include ads-inject.js -%}
+ <!-- Charger et exécuter le JavaScript d’injection (après tout le contenu) -->
+<script src="{{ '/assets/js/ads-inject.js' | relative_url }}"></script>
+
 
   <footer>
     <p style="font-size:0.9em; text-align:center; color:#666;">
