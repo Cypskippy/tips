@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate or update markdown articles from keywords.csv.
+"""Generate or update markdown articles into _pages/ from keywords.csv.
 Adds:
 - Internal linking (Articles connexes)
 - AI-generated FAQ + JSON-LD Schema.org block
@@ -19,13 +19,14 @@ from slugify import slugify
 
 # --- Configuration ---------------------------------------------------------
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONTENT_DIR = ROOT / "_pages"
+PAGES_DIR = ROOT / "_pages"          # <- use Jekyll collection folder
 KEYWORDS_CSV = ROOT / "keywords.csv"
 MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 BATCH = int(os.getenv("BATCH", 5))
 openai.api_key = os.environ.get("OPENAI_API_KEY", "")
 
 # --- Helpers ---------------------------------------------------------------
+
 def llm(prompt: str) -> str:
     """Query the LLM and return plain text."""
     resp = openai.chat.completions.create(
@@ -35,16 +36,23 @@ def llm(prompt: str) -> str:
     )
     return resp.choices[0].message.content.strip()
 
+
 def build_related(slug: str) -> str:
     """Return a markdown section with up to 3 internal links."""
-    others = [p.stem for p in CONTENT_DIR.glob("*.md") if p.stem != slug]
+    others = [p.stem for p in PAGES_DIR.glob("*.md") if p.stem != slug]
     if not others:
         return ""
     links = random.sample(others, k=min(3, len(others)))
-    bullets = "\n".join([
+    bullets = "
+".join([
         f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
     ])
-    return f"\n\n## Articles connexes\n{bullets}\n"
+    return f"
+
+## Articles connexes
+{bullets}
+"
+
 
 def build_faq(keyword: str) -> (str, str):
     """Generate a two-question FAQ (markdown + JSON-LD)."""
@@ -65,8 +73,14 @@ def build_faq(keyword: str) -> (str, str):
         return "", ""
 
     # Build Markdown part
-    faq_md = "\n\n## FAQ\n"
-    faq_md += "\n\n".join([f"**{q}**\n: {a}" for q, a in pairs])
+    faq_md = "
+
+## FAQ
+"
+    faq_md += "
+
+".join([f"**{q}**
+: {a}" for q, a in pairs])
 
     # Build JSON-LD
     schema = {
@@ -81,16 +95,22 @@ def build_faq(keyword: str) -> (str, str):
             "acceptedAnswer": {"@type": "Answer", "text": a}
         })
     faq_json = (
-        "\n\n<script type=\"application/ld+json\">\n"
+        "
+
+<script type=\"application/ld+json\">
+"
         + json.dumps(schema, ensure_ascii=False, indent=2)
-        + "\n</script>\n"
+        + "
+</script>
+"
     )
     return faq_md, faq_json
 
 # --- Core generation -------------------------------------------------------
+
 def generate_article(keyword: str) -> None:
     slug = slugify(keyword)[:90]
-    path = CONTENT_DIR / f"{slug}.md"
+    path = PAGES_DIR / f"{slug}.md"
     today = datetime.date.today().isoformat()
 
     # Prepare frontmatter
@@ -116,9 +136,10 @@ def generate_article(keyword: str) -> None:
     # Combine content
     post.content = body + faq_md + related_md + faq_json
 
-    CONTENT_DIR.mkdir(exist_ok=True)
+    PAGES_DIR.mkdir(exist_ok=True)
     frontmatter.dump(post, path, sort_keys=False)
     print(f"✅ {slug} mis à jour")
+
 
 def main() -> None:
     # Read all keywords
@@ -129,10 +150,11 @@ def main() -> None:
     pending = []
     for kw in keywords:
         slug = slugify(kw)[:90]
-        if not (CONTENT_DIR / f"{slug}.md").exists():
+        if not (PAGES_DIR / f"{slug}.md").exists():
             pending.append(kw)
     for kw in pending[:BATCH]:
         generate_article(kw)
+
 
 if __name__ == "__main__":
     main()
