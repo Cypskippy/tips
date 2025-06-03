@@ -1,13 +1,20 @@
 name: Generate & Deploy Articles
+# 👉 IMPORTANT : donne au token l’autorisation d’écrire dans le repo
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 3 * * *"   # 03 h CET chaque nuit
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # garde le GITHUB_TOKEN pour le push
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -18,9 +25,11 @@ jobs:
         run: |
           python scripts/generate.py
       - name: Commit & push new articles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.email "bot@github"
           git config --global user.name  "Content‑Bot"
           git add content/ || true
           git commit -m "chore(content): auto‑update $(date -u +%F)" || true
-          git push
+          git push origin HEAD:main
