@@ -41,18 +41,8 @@
     <h2><a href="{{ site.baseurl }}/" style="text-decoration:none; color:inherit;">
       {{ site.title }}
     </a></h2>
-    {% if page.toc %}
-  <nav class="table-of-contents">
-    <h2>{{ page.toc_label | default: "Table des matières" }}</h2>
-    {{ page.content | toc }}
-  </nav>
-{% endif %}
+    
 
-Ajoutez (entre le </a></h2> et la fermeture </header>) un petit menu de navigation :
-
-html
-Copier
-Modifier
 <nav style="margin-top:8px; text-align:center;">
   <ul style="list-style:none; padding:0; display:inline-flex; gap:16px;">
     <li>
