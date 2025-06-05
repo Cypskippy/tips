@@ -48,6 +48,29 @@
   </nav>
 {% endif %}
 
+Ajoutez (entre le </a></h2> et la fermeture </header>) un petit menu de navigation :
+
+html
+Copier
+Modifier
+<nav style="margin-top:8px; text-align:center;">
+  <ul style="list-style:none; padding:0; display:inline-flex; gap:16px;">
+    <li>
+      <a href="{{ site.baseurl }}/" style="text-decoration:none; font-weight:bold;">
+        Accueil
+      </a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/" style="text-decoration:none;">
+        Toutes les pages
+      </a>
+    </li>
+    {%- comment -%} Si vous voulez d’autres liens (À propos, Contact), rajoutez ici {%- endcomment -%}
+  </ul>
+</nav>
+<hr/>
+
+    
   </header>
 
   <main>
