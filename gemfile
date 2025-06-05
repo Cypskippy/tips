@@ -16,3 +16,4 @@ gem "github-pages", group: :jekyll_plugins
 # Ne listez **pas** vos plugins “maison” (jekyll-toc, jekyll-some-other),
 # sinon GitHub Pages va refuser le build. Vous restez donc uniquement sur
 # ce que “github-pages” apporte par défaut.
+gem "jekyll-toc", group: :jekyll_plugins
