@@ -53,8 +53,20 @@ title: Accueil
     Chaque document y a son front-matter avec “title” et “date”.
   {%- endcomment -%}
   {% assign all_pages = site.collections['tips'].docs | sort: 'date' | reverse %}
-
   {%- for doc in all_pages -%}
+
+{% assign tips_coll = site.collections['tips'] %}
+{% if tips_coll %}
+  {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
+  … boucle d’affichage …
+{% else %}
+  _Aucun article pour l’instant._
+{% endif %}
+
+
+  
+
+
     <li>
       <a href="{{ doc.url | relative_url }}">
         {{ doc.data.date | date: "%Y-%m-%d" }} – {{ doc.data.title }}
