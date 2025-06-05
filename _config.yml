@@ -22,9 +22,16 @@ permalink: /:title/
 
 # 5. Définition de la "collection" pages
 collections:
-  pages:
+  tips:
     output: true
-    permalink: /:name/    # /nom-du-fichier-sans-.md/
+    permalink: /:name/
+defaults:
+  - scope:
+      path: ""
+      type: tips
+    values:
+      layout: page
+    
 
 # 6. Front matter DEFAULTS : toutes les pages de type "pages" auront layout: page
 defaults:
