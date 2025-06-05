@@ -15,6 +15,7 @@ baseurl: "/Tips"                      # le sous-répertoire GitHub Pages
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  #
 
 # 4. Permalink global par défaut (utilisé si un fichier n'a pas de front matter spécifique)
 permalink: /:title/
