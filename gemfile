@@ -1,0 +1,18 @@
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │                        FICHIER : Gemfile                               │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+source "https://rubygems.org"
+
+# 1. On indique la gem "github-pages", ce qui installe :
+#    - jekyll (version compatible GitHub Pages)
+#    - tous les plugins whitelisted par GitHub Pages
+gem "github-pages", group: :jekyll_plugins
+
+# 2. Si vous aviez besoin, par exemple, d'un plugin supplémentaire
+#    déjà pris en charge par GitHub Pages (ex. "jekyll-paginate"), vous
+#    pourriez l’ajouter ici. Mais avec "github-pages", tout est déjà là.
+#
+# Ne listez **pas** vos plugins “maison” (jekyll-toc, jekyll-some-other),
+# sinon GitHub Pages va refuser le build. Vous restez donc uniquement sur
+# ce que “github-pages” apporte par défaut.
