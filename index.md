@@ -52,8 +52,8 @@ title: Accueil
     On récupère la collection “pages” (les .md créés par generate.py dans _pages/).
     Chaque document y a son front-matter avec “title” et “date”.
   {%- endcomment -%}
+  {% assign all_pages = site.collections['tips'].docs | sort: 'date' | reverse %}
 
-  {%- assign all_pages = site.collections['pages'].docs | sort: 'date' | reverse -%}
   {%- for doc in all_pages -%}
     <li>
       <a href="{{ doc.url | relative_url }}">
