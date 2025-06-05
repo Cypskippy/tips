@@ -22,7 +22,7 @@ from slugify import slugify
 
 # --- Configuration ---------------------------------------------------------
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PAGES_DIR = ROOT / "_pages"          # <- use Jekyll collection folder
+PAGES_DIR = ROOT / "_tips"          # <- use Jekyll collection folder
 KEYWORDS_CSV = ROOT / "keywords.csv"
 MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 BATCH = int(os.getenv("BATCH", 5))
