@@ -48,47 +48,24 @@ title: Accueil
 </style>
 
 <ul>
-  {%- comment -%}
-    On récupère la collection “pages” (les .md créés par generate.py dans _tips/).
-    Chaque document y a son front-matter avec “title” et “date”.
-  {%- endcomment -%}
-  {% assign tips_coll = site.collections['tips'] %}
-{% if tips_coll %}
-  {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
-{% endif %}
-
-  {%- for doc in all_pages -%}
-
 {% assign tips_coll = site.collections['tips'] %}
-{% if tips_coll %}
+{% if tips_coll and tips_coll.docs.size > 0 %}
   {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
-{% if all_pages %}
-  <ul>
   {% for doc in all_pages %}
-    <li><a href="{{ doc.url | relative_url }}">{{ doc.data.title }}</a></li>
-  {% endfor %}
-  </ul>
-{% else %}
-  _Aucun article pour l’instant._
-{% endif %}
-
-
-  
-
-
     <li>
       <a href="{{ doc.url | relative_url }}">
         {{ doc.data.date | date: "%Y-%m-%d" }} – {{ doc.data.title }}
       </a>
     </li>
-  {%- endfor -%}
-  
+  {% endfor %}
+{% else %}
+  _Aucun article pour l’instant._
+{% endif %}
 </ul>
 
 <p>
-  Si vous voulez piocher un peu au hasard, voici le <strong>« Page du jour » »</strong> :
-  {%- assign random_doc = all_pages | sample -%}
-  <a href="{{ random_doc.url | relative_url }}">
-    {{ random_doc.data.title }} ({{ random_doc.data.date | date: "%d %B %Y" }})
-  </a>
+  {% if tips_coll and tips_coll.docs.size > 0 %}
+    {% assign random_doc = tips_coll.docs | sample %}
+    Page du jour : <a href="{{ random_doc.url | relative_url }}">{{ random_doc.data.title }}</a>
+  {% endif %}
 </p>
