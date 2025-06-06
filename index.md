@@ -52,12 +52,17 @@ title: Accueil
     On récupère la collection “pages” (les .md créés par generate.py dans _tips/).
     Chaque document y a son front-matter avec “title” et “date”.
   {%- endcomment -%}
-  {% assign all_pages = site.collections['tips'].docs | sort: 'date' | reverse %}
+  {% assign tips_coll = site.collections['tips'] %}
+{% if tips_coll %}
+  {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
+{% endif %}
+
   {%- for doc in all_pages -%}
 
 {% assign tips_coll = site.collections['tips'] %}
 {% if tips_coll %}
   {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
+{% if all_pages %}
   <ul>
   {% for doc in all_pages %}
     <li><a href="{{ doc.url | relative_url }}">{{ doc.data.title }}</a></li>
