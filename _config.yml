@@ -33,13 +33,7 @@ defaults:
       layout: page
     
 
-# 6. Front matter DEFAULTS : toutes les pages de type "pages" auront layout: page
-defaults:
-  - scope:
-      path: ""            # toutes racines confondues
-      type: pages         # dépêche-toi de créer un dossier _pages !
-    values:
-      layout: page
+
 
 # 7. (Optionnel) Configuration additionnelle pour SEO
 #    Par exemple, si tu veux un logo, des meta “twitter”, etc. Tu peux garder ce bloc pour plus tard.
