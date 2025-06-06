@@ -41,7 +41,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          python scripts/generate.py
+          python generate.py
 
       # 5. On commit et push les nouveaux fichiers si nécessaire
       - name: Commit & push new articles
@@ -50,7 +50,7 @@ jobs:
         run: |
           git config --global user.email "bot@github"
           git config --global user.name "Content-Bot"
-          git add _pages/ || true
+          git add _tips/ || true
           # On ne commit QUE s'il y a un changement dans _pages/
           git diff --quiet && echo "Aucun changement dans _pages/" || \
             git commit -m "chore(content): auto-update $(date -u +%F)"
