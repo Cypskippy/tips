@@ -11,7 +11,7 @@ title: Accueil
 
 <script>
   const data = [
-    {%- for doc in site.collections['pages'].docs -%}
+    {%- for doc in site.collections['tips'].docs -%}
     {
       "title": {{ doc.data.title | jsonify }},
       "url": {{ doc.url | jsonify }},
