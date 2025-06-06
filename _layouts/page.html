@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'fr-FR' }}">
 <head>
-  <button class="nav-toggle" aria-label="Afficher le menu">☰</button>
+  
 
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <meta charset="utf-8"/>
@@ -38,12 +38,14 @@
 </head>
 <body>
   <header>
+    <button class="nav-toggle" aria-label="Afficher le menu">☰</button>
     <h2><a href="{{ site.baseurl }}/" style="text-decoration:none; color:inherit;">
       {{ site.title }}
     </a></h2>
     
 
-<nav style="margin-top:8px; text-align:center;">
+<nav class="site-nav"; style="margin-top:8px; text-align:center;">
+  
   <ul style="list-style:none; padding:0; display:inline-flex; gap:16px;">
     <li>
       <a href="{{ site.baseurl }}/" style="text-decoration:none; font-weight:bold;">
