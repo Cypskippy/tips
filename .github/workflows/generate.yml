@@ -43,6 +43,22 @@ jobs:
         run: |
           python generate.py
 
+    - name: Run generator script
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        mkdir -p logs
+        python generate.py 2>&1 | tee logs/generate.log
+
+    - name: Upload logs as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: generator-logs-${{ github.run_number }}
+        path: logs/
+        retention-days: 14   # garde-les 2 semaines, ajuste à ton goût
+
+
+
       # 5. On commit et push les nouveaux fichiers si nécessaire
       - name: Commit & push new articles
         env:
