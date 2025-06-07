@@ -39,6 +39,7 @@ jobs:
       # 4. On exécute le script qui génère les .md dans _pages/
     
       - name: Run generator script
+        shell: bash -euxo pipefail   # -e = stop, -u = var manquante, -x = trace, -o pipefail
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
