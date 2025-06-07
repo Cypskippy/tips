@@ -39,12 +39,11 @@ jobs:
       # 4. On exécute le script qui génère les .md dans _pages/
     
       - name: Run generator script
-        shell: bash -euxo pipefail   # -e = stop, -u = var manquante, -x = trace, -o pipefail
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           mkdir -p logs
-          set -e                       # stoppe net à la moindre erreur
+          set -euo pipefail            # stoppe à la moindre erreur & trace les variables
           python scripts/generate.py 2>&1 | tee logs/generate.log
 
       - name: Upload logs as artifact
