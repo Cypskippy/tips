@@ -43,7 +43,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           mkdir -p logs
-          python generate.py 2>&1 | tee logs/generate.log
+          set -e                       # stoppe net à la moindre erreur
+          python scripts/generate.py 2>&1 | tee logs/generate.log
 
       - name: Upload logs as artifact
         uses: actions/upload-artifact@v4
