@@ -123,6 +123,7 @@ def generate_article(keyword: str) -> None:
         counter += 1
 
     today = datetime.date.today().isoformat()
+  
 
     # Prepare frontmatter
     if target_path.exists():
@@ -156,6 +157,14 @@ def generate_article(keyword: str) -> None:
     PAGES_DIR.mkdir(exist_ok=True)
 
     # Write to file
+    # --- avant d'écrire le fichier ---
+    if "title" not in post:
+        post["title"] = keyword.title()
+
+    if "date" not in post:
+        post["date"] = today
+
+   
     try:
         frontmatter.dump(post, target_path, sort_keys=False)
         print(f"✅ {slug} mis à jour")
