@@ -1,10 +1,9 @@
-<meta http-equiv="refresh" content="0; url=/Tips/">
-
-
 ---
 layout: page
 title: Accueil
 ---
+<meta http-equiv="refresh" content="0; url=/Tips/">
+
 
 # Bienvenue sur Cyprien – Programmatic SEO  
 
