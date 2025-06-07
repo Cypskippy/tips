@@ -50,7 +50,7 @@ title: Accueil
 </style>
 
 <ul>
-{% assign tips_coll = site.collections['tips'] %}
+{% assign pages_tips = site.tips %}
 {% if tips_coll and tips_coll.docs.size > 0 %}
   {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
   {% for doc in all_pages %}
