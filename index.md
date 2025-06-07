@@ -1,36 +1,40 @@
 ---
 layout: page
 title: Accueil
+permalink: /
 ---
-<meta http-equiv="refresh" content="0; url=/Tips/">
 
+<!-- redirection temporaire : si tu la veux, garde-la en minuscules -->
+<meta http-equiv="refresh" content="0; url=/tips/">
 
-# Bienvenue sur Cyprien – Programmatic SEO  
+# Bienvenue sur Cyprien – Programmatic SEO
 
 (Repris 100 % à l’arrache : voici toutes les pages générées automatiquement !)
+
 <input type="text" id="search-input" placeholder="Rechercher une page…">
 <ul id="results-container"></ul>
 
 <script>
+  /* -- Base de données des pages pour la recherche -- */
   const data = [
-    {%- for doc in site.collections['tips'].docs -%}
+    {%- for doc in site.tips -%}
     {
-      "title": {{ doc.data.title | jsonify }},
-      "url": {{ doc.url | jsonify }},
-      "excerpt": {{ doc.content | strip_html | strip_newlines | truncate: 100 | jsonify }}
+      "title": {{ doc.title       | jsonify }},
+      "url":   {{ doc.url         | jsonify }},
+      "excerpt": {{ doc.content   | strip_html | strip_newlines | truncate: 100 | jsonify }}
     }{%- unless forloop.last -%},{% endunless -%}
     {%- endfor -%}
   ];
 
   document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("search-input");
+    const input   = document.getElementById("search-input");
     const results = document.getElementById("results-container");
 
     input.addEventListener("input", () => {
       const q = input.value.toLowerCase();
       results.innerHTML = "";
-
       if (q.length < 2) return;
+
       data
         .filter(item =>
           item.title.toLowerCase().includes(q) ||
@@ -44,19 +48,20 @@ title: Accueil
     });
   });
 </script>
+
 <style>
   #results-container { list-style: none; padding: 0; margin-top: 10px; }
   #results-container li { margin-bottom: 8px; }
 </style>
 
+<!-- ---------- Liste complète triée ----------- -->
 <ul>
-{% assign pages_tips = site.tips %}
-{% if tips_coll and tips_coll.docs.size > 0 %}
-  {% assign all_pages = tips_coll.docs | sort: 'date' | reverse %}
-  {% for doc in all_pages %}
+{% assign pages_tips = site.tips | sort: 'date' | reverse %}
+{% if pages_tips.size > 0 %}
+  {% for doc in pages_tips %}
     <li>
       <a href="{{ doc.url | relative_url }}">
-        {{ doc.data.date | date: "%Y-%m-%d" }} – {{ doc.data.title }}
+        {{ doc.date | date: "%Y-%m-%d" }} – {{ doc.title }}
       </a>
     </li>
   {% endfor %}
@@ -65,9 +70,8 @@ title: Accueil
 {% endif %}
 </ul>
 
-<p>
-  {% if tips_coll and tips_coll.docs.size > 0 %}
-    {% assign random_doc = tips_coll.docs | sample %}
-    Page du jour : <a href="{{ random_doc.url | relative_url }}">{{ random_doc.data.title }}</a>
-  {% endif %}
-</p>
+<!-- ------------ Page aléatoire du jour ------------ -->
+{% if pages_tips.size > 0 %}
+  {% assign random_doc = pages_tips | sample %}
+  <p>Page du jour : <a href="{{ random_doc.url | relative_url }}">{{ random_doc.title }}</a></p>
+{% endif %}
