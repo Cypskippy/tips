@@ -55,17 +55,24 @@ jobs:
 
 
       # 5. On commit et push les nouveaux fichiers si nécessaire
-      - name: Commit & push new articles
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.email "bot@github"
-          git config --global user.name "Content-Bot"
-          git add _tips/ || true
-          # On ne commit QUE s'il y a un changement dans _pages/
-          git diff --quiet && echo "Aucun changement dans _pages/" || \
-            git commit -m "chore(content): auto-update $(date -u +%F)"
-          git push origin HEAD:main
+     - name: Commit & push new articles
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    # Paramétrage de l’identité du bot
+    git config --global user.email "bot@github"
+    git config --global user.name  "Content-Bot"
+
+    # On ajoute les nouveaux/-x fichiers markdown générés
+    git add _tips/
+
+    # Si rien n’a changé entre HEAD et l’index, on sort gentiment
+    if git diff --cached --quiet; then
+      echo "Aucun changement dans _tips/, rien à pousser."
+    else
+      git commit -m "chore(content): auto-update $(date -u +%F)"
+      git push origin HEAD:main
+    fi
 
       # 6. On ping Google pour indiquer que le sitemap a changé
       - name: Ping Google pour le sitemap
