@@ -9,7 +9,7 @@ markdown: kramdown
 
 # 2. URL + BaseURL (indispensable pour que Jekyll génère des liens corrects)
 url: "https://cypskippy.github.io"    # ta racine publique (sans slash final)
-baseurl: "/Tips"                      # le sous-répertoire GitHub Pages
+baseurl: "/tips"                      # le sous-répertoire GitHub Pages
 
 # 3. Plugins pour sitemap et balises SEO
 plugins:
