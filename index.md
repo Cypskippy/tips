@@ -5,7 +5,7 @@ permalink: /
 ---
 
 <!-- redirection temporaire : si tu la veux, garde-la en minuscules -->
-<meta http-equiv="refresh" content="0; url=/tips/">
+<!-- <meta http-equiv="refresh" content="0; url=/tips/"> -->
 
 # Bienvenue sur Cyprien – Programmatic SEO
 
