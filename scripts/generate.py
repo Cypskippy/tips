@@ -10,7 +10,7 @@ Points clés :
 • Affichage de chemin simple (pas de relative\_to) pour éviter les erreurs sur GitHub Actions.
 """
 
-from **future** import annotations
+from future import annotations
 
 import csv
 import datetime as dt
