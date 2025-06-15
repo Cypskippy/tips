@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!article) return;
 
   const paragraphs = article.querySelectorAll("p");
-  if (paragraphs.length < 3) return;  // on a moins de 3 paragraphes : rien à faire
+  if (paragraphs.length < 8) return;   // injecte seulement si l'article est vraiment long
 
   // Créer le conteneur publicitaire
   const adWrapper = document.createElement("div");
