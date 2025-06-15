@@ -137,9 +137,9 @@ def generate_article(keyword: str) -> None:
     # Generate main body
     try:
         body_prompt = (
-            "Rédige un article de blog de 500 mots en français, structuré (h2/h3), "
-            "avec une introduction claire, un tableau si pertinent, "
-            "et une conclusion pratique. Sujet : " + keyword
+            "Rédige un article de 900 à 1200 mots en français, ton expert mais accessible, "
+            "intro engageante, section critères, tableau comparatif (si pertinent), "
+            "FAQ intégrée, conclusion actionnable, cite 2 sources fiables."
         )
         body = llm(body_prompt)
     except Exception as e:
