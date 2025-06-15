@@ -72,7 +72,8 @@ html <!-- Start CookieYes CMP -->
     <article>
       <h1>{{ page.title }}</h1>
 
-      <!-- Bloc publicitaire #1 (juste sous le titre) -->
+      {% if page.wordcount and page.wordcount > 800 %}
+      <!-- Bloc pub (après H2) -->
       <div class="ad-container-top">
         <ins class="adsbygoogle"
              style="display:block"
@@ -84,6 +85,7 @@ html <!-- Start CookieYes CMP -->
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
       </div>
+      {% endif %}
 
       <!-- Contenu généré par Jekyll depuis _pages/*.md -->
       {{ content }}
