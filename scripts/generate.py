@@ -1,4 +1,4 @@
-\#!/usr/bin/env python3
+#!/usr/bin/env python3
 """generate.py — Génère des articles Markdown à partir d'une liste de mots-clés.
 
 Version corrigée :
