@@ -24,7 +24,9 @@ from slugify import slugify
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PAGES_DIR = ROOT / "_tips"          # <- use Jekyll collection folder
 KEYWORDS_CSV = ROOT / "keywords.csv"
+# Modèle & température réduite (plus conservateur)
 MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+TEMP  = float(os.getenv("LLM_TEMP", "0.3"))
 BATCH = int(os.getenv("BATCH", 5))
 
 # Set your OpenAI API key in environment variable
@@ -40,7 +42,7 @@ def llm(prompt: str) -> str:
             resp = openai.chat.completions.create(
                 model=MODEL,
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
+                temperature=TEMP,
             )
             return resp.choices[0].message.content.strip()
         except Exception as e:
@@ -136,13 +138,26 @@ def generate_article(keyword: str) -> None:
 
     # Generate main body
     try:
-        body_prompt = (
-            "Rédige un article de 900 à 1200 mots en français, ton expert mais accessible, "
-            "intro engageante, section critères, tableau comparatif (si pertinent), "
-            "FAQ intégrée, conclusion actionnable, cite 2 sources fiables."
+             base_prompt = (
+            "Rédige un article de blog de 900 à 1 200 mots en français, "
+            "uniquement sur le sujet EXACT suivant, sans t’en éloigner : « "
+            + keyword
+            + " ». Utilise H2/H3, ajoute une conclusion pratique. "
+            "Ne traite AUCUN autre thème."
         )
-        body = llm(body_prompt)
-    except Exception as e:
+
+        # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
+        attempts = 0
+        while attempts < 3:
+            attempts += 1
+            body = llm(base_prompt)
+            if body.lower().count(keyword.split()[0]) >= 3:
+                break
+            print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
+        else:
+            body = f"# {keyword}\n\nContenu non disponible – génération hors sujet."
+            )
+        except Exception as e:
         print(f"  ✗ Erreur génération du corps pour '{keyword}': {e}")
         body = f"# {keyword}\n\nLe contenu n'a pas pu être généré pour ce mot-clé."
 
