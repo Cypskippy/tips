@@ -1,269 +1,123 @@
-@@ def generate_article(keyword: str) -> None:
--        base_prompt = (
--            "Rédige un article de blog de 900 à 1 200 mots en français, "
--            "uniquement sur le sujet EXACT suivant, sans t’en éloigner : « "
--            + keyword
--            + " ». Utilise H2/H3, ajoute une conclusion pratique. "
--            "Ne traite AUCUN autre thème."
--        )
--
--        # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
--        attempts = 0
--        while attempts < 3:
--            attempts += 1
--            body = llm(base_prompt)
--            if body.lower().count(keyword.split()[0]) >= 3:
--                break
--            print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
--        else:
--            body = f"# {keyword}\n\nContenu non disponible – génération hors sujet."
-+    base_prompt = (
-+        "Rédige un article de blog de 900 à 1 200 mots en français, "
-+        f"uniquement sur le sujet EXACT suivant, sans t’en éloigner : « {keyword} ». "
-+        "Utilise H2/H3 et ajoute une conclusion pratique. "
-+        "Ne traite AUCUN autre thème."
-+    )
-+
-+    # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
-+    attempts = 0
-+    while attempts < 3:
-+        attempts += 1
-+        body = llm(base_prompt)
-+        if body.lower().count(keyword.split()[0]) >= 3:
-+            break
-+        print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
-+    else:
-+        body = (
-+            f"# {keyword}\n\n"
-+            "Contenu non disponible – génération hors sujet."
-+        )
-
-
 #!/usr/bin/env python3
-"""Generate or update markdown articles into _pages/ from keywords.csv.
-Adds:
-- Internal linking (Articles connexes)
-- AI-generated FAQ + JSON-LD Schema.org block
-- Skips empty lines in keywords.csv to avoid premature termination
-- Wrapped LLM calls in try/except to log failures and continue
-- Ready for nightly GitHub Actions cron
+"""generate.py — Génère des articles Markdown à partir d'une liste de mots‑clés.
+
+✅ Points clés :
+    • Prompt verrouillé sur le sujet EXACT pour éviter les hors‑sujets.
+    • Température réduite (0.3) pour moins de dérives.
+    • Validation : le mot‑clé doit apparaître ≥ 3 fois, sinon on retente (3 essais max).
+    • `wordcount` ajouté au front‑matter, et `robots: noindex` si < 600 mots.
+    • Compatible GitHub Actions (aucune dépendance exotique hors bs4/markdown/openai).
 """
 
-import csv
-import datetime
-import json
+from __future__ import annotations
 import os
-import random
-import pathlib
-import time
+import csv
+import datetime as dt
+from pathlib import Path
+from typing import Final
 
-import frontmatter
-import openai
-from slugify import slugify
+import markdown
+from bs4 import BeautifulSoup
+from openai import OpenAI
 
-# --- Configuration ---------------------------------------------------------
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-PAGES_DIR = ROOT / "_tips"          # <- use Jekyll collection folder
-KEYWORDS_CSV = ROOT / "keywords.csv"
-# Modèle & température réduite (plus conservateur)
-MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
-TEMP  = float(os.getenv("LLM_TEMP", "0.3"))
-BATCH = int(os.getenv("BATCH", 5))
+###########################################################################
+# Configuration
+###########################################################################
+# ➜ Variables d'environnement (préférées car masquées dans GitHub Actions)
+MODEL: Final[str] = os.getenv("LLM_MODEL", "gpt-4o-mini")
+TEMP: Final[float] = float(os.getenv("LLM_TEMP", "0.3"))  # 0.3 = ton plus stable
+OPENAI_KEY: Final[str] = os.getenv("OPENAI_API_KEY", "")
 
-# Set your OpenAI API key in environment variable
-openai.api_key = os.environ.get("OPENAI_API_KEY", "")
+if not OPENAI_KEY:
+    raise RuntimeError("OPENAI_API_KEY est manquant dans les variables d'env !")
 
-# --- Helpers ---------------------------------------------------------------
+client = OpenAI()
+OUTPUT_DIR = Path("_tips")
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+###########################################################################
+# Helper : appel LLM
+###########################################################################
 
 def llm(prompt: str) -> str:
-    """Query the LLM and return plain text. Retries up to 3 times on failure."""
-    retries = 0
-    while retries < 3:
-        try:
-            resp = openai.chat.completions.create(
-                model=MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=TEMP,
-            )
-            return resp.choices[0].message.content.strip()
-        except Exception as e:
-            retries += 1
-            print(f"  → Erreur LLM (essai {retries}/3) pour prompt : {e}")
-            time.sleep(2)
-    raise RuntimeError(f"Échec de l'appel LLM après 3 tentatives pour prompt: {prompt}")
-
-
-def build_related(slug: str) -> str:
-    """Return a markdown section with up to 3 internal links to other pages."""
-    others = [p.stem for p in PAGES_DIR.glob("*.md") if p.stem != slug]
-    if not others:
-        return ""
-    links = random.sample(others, k=min(3, len(others)))
-    bullets = "\n".join([
-        f"- [{l.replace('-', ' ').title()}](/{l}/)" for l in links
-    ])
-    return f"\n\n## Articles connexes\n{bullets}\n"
-
-
-def build_faq(keyword: str) -> (str, str):
-    """Generate a two-question FAQ (markdown + JSON-LD)."""
-    prompt = (
-        "Donne deux questions fréquentes très courtes (max 12 mots) "
-        "avec leur réponse concise (1 phrase) au sujet : " + keyword + ". "
-        "Format : Q:question puis A:réponse sur la ligne suivante. Répète pour la 2ème question."
+    """Envoie le prompt au LLM et renvoie le contenu brut."""
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=TEMP,
     )
-    try:
-        raw = llm(prompt)
-    except Exception as e:
-        print(f"  ✗ Erreur génération FAQ pour '{keyword}': {e}")
-        return "", ""
-    lines = [l.strip() for l in raw.splitlines() if l.strip()]
-    pairs = []
-    for i in range(0, len(lines), 2):
-        if i + 1 < len(lines):
-            q = lines[i].removeprefix("Q:").removeprefix("q:").strip()
-            a = lines[i + 1].removeprefix("A:").removeprefix("a:").strip()
-            pairs.append((q, a))
+    return response.choices[0].message.content.strip()
 
-    if not pairs:
-        return "", ""
-
-    # Build Markdown part
-    faq_md = "\n\n## FAQ\n"
-    faq_md += "\n\n".join([f"**{q}**\n: {a}" for q, a in pairs])
-
-    # Build JSON-LD
-    schema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": []
-    }
-    for q, a in pairs:
-        schema["mainEntity"].append({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": {"@type": "Answer", "text": a}
-        })
-    faq_json = (
-        "\n\n<script type=\"application/ld+json\">\n"
-        + json.dumps(schema, ensure_ascii=False, indent=2)
-        + "\n</script>\n"
-    )
-    return faq_md, faq_json
-
-# --- Core generation -------------------------------------------------------
+###########################################################################
+# Génération d'un article
+###########################################################################
 
 def generate_article(keyword: str) -> None:
-    slug_base = slugify(keyword)[:90]
-    slug = slug_base or f"mot-cle-{int(time.time())}"
+    """Génère un article et l'enregistre dans _tips/slug.md."""
 
-    # Ensure unique slug (avoid overwriting existing)
-    counter = 1
-    target_path = PAGES_DIR / f"{slug}.md"
-    while target_path.exists():
-        slug = f"{slug_base}-{counter}"
-        target_path = PAGES_DIR / f"{slug}.md"
-        counter += 1
+    slug = keyword.replace(" ", "-").lower()
+    outfile = OUTPUT_DIR / f"{slug}.md"
 
-    today = datetime.date.today().isoformat()
-  
+    base_prompt = (
+        "Rédige un article de blog de 900 à 1 200 mots en français, "
+        f"uniquement sur le sujet EXACT suivant, sans t’en éloigner : « {keyword} ». "
+        "Utilise H2/H3, ajoute une conclusion pratique et une FAQ de 3 questions. "
+        "Ne traite AUCUN autre thème."
+    )
 
-    # Prepare frontmatter
-    if target_path.exists():
-        post = frontmatter.load(target_path)
+    # Boucle de validation — max 3 tentatives
+    attempts = 0
+    while attempts < 3:
+        attempts += 1
+        body_md = llm(base_prompt)
+        # Vérifie la présence du mot‑clé principal ≥ 3 fois dans le contenu
+        if body_md.lower().count(keyword.split()[0].lower()) >= 3:
+            break
+        print(f"↻ Hors sujet pour ‘{keyword}’ — nouvelle tentative {attempts}/3…")
     else:
-        post = frontmatter.loads("")
-        post["title"] = keyword.title()
-        post["date"] = today
-    post["last_updated"] = today
-
-    # Generate main body
-    try:
-             base_prompt = (
-            "Rédige un article de blog de 900 à 1 200 mots en français, "
-            "uniquement sur le sujet EXACT suivant, sans t’en éloigner : « "
-            + keyword
-            + " ». Utilise H2/H3, ajoute une conclusion pratique. "
-            "Ne traite AUCUN autre thème."
+        body_md = (
+            f"# {keyword}\n\n"
+            "Contenu non disponible – génération hors sujet après 3 tentatives."
         )
 
-        # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
-        attempts = 0
-        while attempts < 3:
-            attempts += 1
-            body = llm(base_prompt)
-            if body.lower().count(keyword.split()[0]) >= 3:
-                break
-            print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
-        else:
-            body = f"# {keyword}\n\nContenu non disponible – génération hors sujet."
-            )
-        except Exception as e:
-        print(f"  ✗ Erreur génération du corps pour '{keyword}': {e}")
-        body = f"# {keyword}\n\nLe contenu n'a pas pu être généré pour ce mot-clé."
+    # Calcul du nombre de mots (HTML ➜ texte brut)
+    html_body = markdown.markdown(body_md)
+    wordcount = len(BeautifulSoup(html_body, "html.parser").get_text().split())
 
-    # Generate FAQ and related sections
-    faq_md, faq_json = build_faq(keyword)
-    related_md = build_related(slug)
+    # Front‑matter YAML :
+    fm = {
+        "title": keyword.title(),
+        "date": dt.date.today().isoformat(),
+        "last_updated": dt.date.today().isoformat(),
+        "wordcount": wordcount,
+    }
+    if wordcount < 600:
+        fm["robots"] = "noindex"
 
-    # Combine content
-    post.content = body + faq_md + related_md + faq_json
+    # Conversion dict ➜ YAML simple
+    front_matter = "---\n" + "\n".join(f"{k}: {v}" for k, v in fm.items()) + "\n---\n\n"
 
-    # Ensure pages directory exists
-    PAGES_DIR.mkdir(exist_ok=True)
+    outfile.write_text(front_matter + body_md, encoding="utf‑8")
+    print(f"✓ {outfile.relative_to(Path.cwd())} — {wordcount} mots")
 
-    # Write to file
-    # --- avant d'écrire le fichier ---
-    if "title" not in post:
-        post["title"] = keyword.title()
-
-    if "date" not in post:
-        post["date"] = today
-
-   
-    try:
-        frontmatter.dump(post, target_path, sort_keys=False)
-        print(f"✅ {slug} mis à jour")
-    except Exception as e:
-        print(f"  ✗ Erreur écriture fichier pour '{keyword}' (slug='{slug}'): {e}")
-        with open(ROOT / "logs" / "erreurs_generation.log", "a", encoding="utf-8") as log_f:
-            log_f.write(f"{keyword} : impossible d'écrire {target_path} → {e}\n")
-
+###########################################################################
+# Point d'entrée : lit keywords.csv et lance la génération
+###########################################################################
 
 def main() -> None:
-    # Prepare logs directory
-    (ROOT / "logs").mkdir(exist_ok=True)
+    keywords_csv = Path("keywords.csv")
+    if not keywords_csv.exists():
+        print("⚠️  keywords.csv introuvable ; rien à générer.")
+        return
 
-    # Read all keywords, skipping empty lines
-    keywords = []
-    with KEYWORDS_CSV.open(encoding="utf-8") as f:
+    with keywords_csv.open(newline="", encoding="utf‑8") as f:
         reader = csv.reader(f)
         for row in reader:
-            if not row or not row[0].strip():
-                # Skip empty or whitespace-only lines
+            if not row:
                 continue
-            keywords.append(row[0].strip())
-
-    print(f"→ Nombre de mots-clés à traiter : {len(keywords)}")
-
-    # Determine which to generate
-    pending = []
-    for kw in keywords:
-        slug_test = slugify(kw)[:90] or f"mot-cle-{int(time.time())}"
-        if not (PAGES_DIR / f"{slug_test}.md").exists():
-            pending.append(kw)
-    print(f"→ Nombre de mots-clés pendants : {len(pending)}")
-
-    # Generate up to BATCH articles
-    for kw in pending[:BATCH]:
-        try:
-            generate_article(kw)
-        except Exception as e:
-            # Log and continue on any unexpected failure
-            print(f"  ✗ Erreur inattendue pour '{kw}': {e}")
-            with open(ROOT / "logs" / "erreurs_generation.log", "a", encoding="utf-8") as log_f:
-                log_f.write(f"{kw} : erreur inattendue → {e}\n")
-
+            keyword = row[0].strip()
+            if keyword:
+                generate_article(keyword)
 
 if __name__ == "__main__":
     main()
