@@ -1,3 +1,44 @@
+@@ def generate_article(keyword: str) -> None:
+-        base_prompt = (
+-            "Rédige un article de blog de 900 à 1 200 mots en français, "
+-            "uniquement sur le sujet EXACT suivant, sans t’en éloigner : « "
+-            + keyword
+-            + " ». Utilise H2/H3, ajoute une conclusion pratique. "
+-            "Ne traite AUCUN autre thème."
+-        )
+-
+-        # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
+-        attempts = 0
+-        while attempts < 3:
+-            attempts += 1
+-            body = llm(base_prompt)
+-            if body.lower().count(keyword.split()[0]) >= 3:
+-                break
+-            print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
+-        else:
+-            body = f"# {keyword}\n\nContenu non disponible – génération hors sujet."
++    base_prompt = (
++        "Rédige un article de blog de 900 à 1 200 mots en français, "
++        f"uniquement sur le sujet EXACT suivant, sans t’en éloigner : « {keyword} ». "
++        "Utilise H2/H3 et ajoute une conclusion pratique. "
++        "Ne traite AUCUN autre thème."
++    )
++
++    # ⇢ Validation : le mot-clé doit être présent ≥ 3 fois
++    attempts = 0
++    while attempts < 3:
++        attempts += 1
++        body = llm(base_prompt)
++        if body.lower().count(keyword.split()[0]) >= 3:
++            break
++        print(f"  ↻ Sujet décalé, nouvelle tentative ({attempts})…")
++    else:
++        body = (
++            f"# {keyword}\n\n"
++            "Contenu non disponible – génération hors sujet."
++        )
+
+
 #!/usr/bin/env python3
 """Generate or update markdown articles into _pages/ from keywords.csv.
 Adds:
