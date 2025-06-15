@@ -110,10 +110,20 @@ html <!-- Start CookieYes CMP -->
 <script src="{{ '/assets/js/ads-inject.js' | relative_url }}"></script>
 
 
-  <footer>
-    <p style="font-size:0.9em; text-align:center; color:#666;">
-      &copy; {{ "now" | date: "%Y" }} {{ site.title }} • Tous droits réservés
-    </p>
-  </footer>
+  <footer class="site-footer">
+  <nav class="legal-links">
+    <a href="{{ '/mentions-legales/' | relative_url }}">Mentions légales</a> •
+    <a href="{{ '/confidentialite/'   | relative_url }}">Confidentialité & cookies</a> •
+    <a href="{{ '/contact/'           | relative_url }}">Contact</a> •
+    <a href="{{ '/a-propos/'          | relative_url }}">À propos</a>
+  </nav>
+
+  <!-- Lien CMP CookieYes -->
+  <a id="cky-btn" href="javascript:void(0);">Gérer mes cookies</a>
+
+  <p class="copyright">
+    © {{ 'now' | date: '%Y' }} Cyprien — Tous droits réservés
+  </p>
+</footer>
 </body>
 </html>
