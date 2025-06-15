@@ -89,7 +89,7 @@ print(f"✓ écrit : {path} ({wordcount} mots)")
 def generate\_article(keyword: str) -> None:
 prompt = (
 "Rédige un article de 900 à 1 200 mots en français, uniquement sur : "
-f"« {keyword} ». Utilise H2/H3, termine par une conclusion pratique et une FAQ."\n"
+f"« {keyword} ». Utilise H2/H3, termine par une conclusion pratique et une FAQ.\\n"
 "Ne traite aucun autre sujet."
 )
 
