@@ -22,11 +22,11 @@ import markdown  # pip install Markdown
 from bs4 import BeautifulSoup  # pip install beautifulsoup4
 from openai import OpenAI  # pip install openai
 
-\###########################################################################
+###########################################################################
 
 # Configuration
 
-\###########################################################################
+###########################################################################
 MODEL: Final\[str] = os.getenv("LLM\_MODEL", "gpt-4o-mini")
 TEMP: Final\[float] = float(os.getenv("LLM\_TEMP", "0.3"))
 API\_KEY: Final\[str] = os.getenv("OPENAI\_API\_KEY", "")
@@ -38,11 +38,11 @@ client = OpenAI()
 OUTPUT\_DIR = Path("\_tips")
 OUTPUT\_DIR.mkdir(parents=True, exist\_ok=True)
 
-\###########################################################################
+###########################################################################
 
 # Helpers
 
-\###########################################################################
+###########################################################################
 
 def llm(prompt: str) -> str:
 """Appelle le modèle OpenAI et renvoie la réponse brute."""
@@ -80,11 +80,11 @@ path.write_text(front + body_md, encoding="utf-8")
 print(f"✓ écrit : {path} ({wordcount} mots)")
 ```
 
-\###########################################################################
+###########################################################################
 
 # Génération principale
 
-\###########################################################################
+###########################################################################
 
 def generate\_article(keyword: str) -> None:
 prompt = (
