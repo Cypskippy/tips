@@ -24,7 +24,7 @@ permalink: /:title/
 collections:
   tips:
     output: true
-    permalink: /:name/
+    permalink: /tips/:path/
 defaults:
   - scope:
       path: ""
@@ -32,6 +32,8 @@ defaults:
     values:
       layout: page
     
+yml\ncollections:\n tips:\n output: true\n permalink: /tips/:path/\n
+
 
 
 
