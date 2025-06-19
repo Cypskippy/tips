@@ -2,12 +2,18 @@
 
 # -*- coding: utf-8 -*-
 
-"""generate.py — génère automatiquement des articles Markdown depuis keywords.csv.
+"""generate.py – génère des articles Markdown listés dans keywords.csv.
 
-Points clés :
-• Sujet verrouillé (mot‑clé ≥ 3 occurrences).
-• wordcount + robots: noindex si < 600 mots.
-• Chemin affiché simplement (pas de relative\_to) pour GitHub Actions.
+Fonctionnement :
+
+1. Lit keywords.csv.
+2. Pour chaque mot‑clé, interroge l’API OpenAI (modèle défini via \$LLM\_MODEL).
+3. Vérifie que le mot‑clé apparaît ≥ 3 fois pour valider le sujet.
+4. Écrit un fichier *md* dans \_tips/ avec un front‑matter YAML complet.
+5. Ajoute robots: noindex si l’article fait moins de 600 mots.
+
+Le script affiche la progression dans stdout, ce qui permet de suivre le job
+GitHub Actions. 
 """
 
 from **future** import annotations
@@ -22,11 +28,12 @@ import markdown               # pip install Markdown
 from bs4 import BeautifulSoup  # pip install beautifulsoup4
 from openai import OpenAI      # pip install openai
 
-\###############################################################################
+# ---------------------------------------------------------------------------
 
 # Configuration
 
-\###############################################################################
+# ---------------------------------------------------------------------------
+
 MODEL: Final\[str] = os.getenv("LLM\_MODEL", "gpt-4o-mini")
 TEMP: Final\[float] = float(os.getenv("LLM\_TEMP", "0.3"))
 API\_KEY: Final\[str] = os.getenv("OPENAI\_API\_KEY", "")
@@ -38,28 +45,29 @@ client = OpenAI()
 OUTPUT\_DIR = Path("\_tips")
 OUTPUT\_DIR.mkdir(parents=True, exist\_ok=True)
 
-\###############################################################################
+# ---------------------------------------------------------------------------
 
 # Helpers
 
-\###############################################################################
+# ---------------------------------------------------------------------------
 
 def llm(prompt: str) -> str:
-"""Interroge le modèle OpenAI et renvoie la réponse brute."""
-resp = client.chat.completions.create(
+"""Retourne la réponse brute du modèle OpenAI."""
+response = client.chat.completions.create(
 model=MODEL,
 temperature=TEMP,
 messages=\[{"role": "user", "content": prompt}],
+timeout=60,  # 1 minute max par appel
 )
-return resp.choices\[0].message.content.strip()
+return response.choices\[0].message.content.strip()
 
 def save\_article(keyword: str, body\_md: str) -> None:
-"""Enregistre l’article avec front-matter YAML."""
+"""Écrit l’article dans \_tips/ avec front‑matter YAML."""
 slug = keyword.replace(" ", "-").lower()
 path = OUTPUT\_DIR / f"{slug}.md"
 
 ```
-# Nombre de mots
+# Calcul du nombre de mots
 wordcount = len(
     BeautifulSoup(markdown.markdown(body_md), "html.parser")
     .get_text()
@@ -77,23 +85,22 @@ if wordcount < 600:
 
 front = "---\n" + "\n".join(f"{k}: {v}" for k, v in fm.items()) + "\n---\n\n"
 path.write_text(front + body_md, encoding="utf-8")
-print(f"✓ écrit : {path} ({wordcount} mots)")
+print(f"✓ écrit : {path}  ({wordcount} mots)")
 ```
 
-\###############################################################################
+# ---------------------------------------------------------------------------
 
-# Génération principale
+# Génération d’un article
 
-\###############################################################################
+# ---------------------------------------------------------------------------
 
 def generate\_article(keyword: str) -> None:
-\# Log de progression visible dans GitHub Actions
-print(f"• Génération : {keyword}")
+print(f"• Génération : {keyword}")
 
 ```
 prompt = (
-    "Rédige un article de 900 à 1 200 mots en français, uniquement sur : "
-    f"« {keyword} ». Utilise H2/H3, termine par une conclusion pratique et une FAQ.\n"
+    "Rédige un article de 900 à 1 200 mots en français, uniquement sur : "
+    f"« {keyword} ». Utilise des H2/H3, termine par une conclusion pratique et une FAQ.\n"
     "Ne traite aucun autre sujet."
 )
 
@@ -107,6 +114,12 @@ for attempt in range(1, 4):
 # Fallback après 3 tentatives
 save_article(keyword, f"# {keyword}\n\nContenu non disponible – hors sujet.")
 ```
+
+# ---------------------------------------------------------------------------
+
+# Point d’entrée
+
+# ---------------------------------------------------------------------------
 
 def main() -> None:
 csv\_file = Path("keywords.csv")
