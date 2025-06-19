@@ -5,24 +5,24 @@ permalink: /
 ---
 
 <!-- redirection temporaire : si tu la veux, garde-la en minuscules -->
-<!-- <meta http-equiv="refresh" content="0; url=/tips/"> -->
+{# <meta http-equiv="refresh" content="0; url=/tips/"> #}
 
 # Bienvenue sur Cyprien – Programmatic SEO
 
-(Repris 100 % à l’arrache : voici toutes les pages générées automatiquement !)
+*(Listing auto-généré de toutes les pages !)*
 
 <input type="text" id="search-input" placeholder="Rechercher une page…">
 <ul id="results-container"></ul>
 
 <script>
-  /* -- Base de données des pages pour la recherche -- */
+  /* ---- Base de données des pages pour la recherche ---- */
   const data = [
     {%- for doc in site.tips -%}
     {
-      "title": {{ doc.title       | jsonify }},
-      "url":   {{ doc.url         | jsonify }},
-      "excerpt": {{ doc.content   | strip_html | strip_newlines | truncate: 100 | jsonify }}
-    }{%- unless forloop.last -%},{% endunless -%}
+      "title": {{ doc.title   | jsonify }},
+      "url":   {{ doc.url     | jsonify }},
+      "excerpt": {{ doc.content | strip_html | strip_newlines | truncate: 100 | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ];
 
@@ -54,24 +54,33 @@ permalink: /
   #results-container li { margin-bottom: 8px; }
 </style>
 
-<!-- ---------- Liste complète triée ----------- -->
+---
+
+## Toutes les pages
+
+{% assign tips_list = site.tips | sort: "date" | reverse %}
+{% if tips_list.size > 0 %}
 <ul>
-{% assign tips_list = site.tips | where: "date" | sort: "date" %}
-{% if pages_tips.size > 0 %}
-  {% for doc in pages_tips %}
+  {% for doc in tips_list %}
     <li>
       <a href="{{ doc.url | relative_url }}">
         {{ doc.date | date: "%Y-%m-%d" }} – {{ doc.title }}
       </a>
     </li>
   {% endfor %}
-{% else %}
-  _Aucun article pour l’instant._
-{% endif %}
 </ul>
+{% else %}
+_Aucun article pour l’instant._
+{% endif %}
 
-<!-- ------------ Page aléatoire du jour ------------ -->
-{% if pages_tips.size > 0 %}
-  {% assign random_doc = pages_tips | sample %}
-  <p>Page du jour : <a href="{{ random_doc.url | relative_url }}">{{ random_doc.title }}</a></p>
+---
+
+## Page aléatoire du jour
+
+{% if tips_list.size > 0 %}
+{% assign random_doc = tips_list | sample %}
+<p>
+  👉 <strong>À découvrir :</strong>
+  <a href="{{ random_doc.url | relative_url }}">{{ random_doc.title }}</a>
+</p>
 {% endif %}
