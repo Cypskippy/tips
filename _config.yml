@@ -1,43 +1,34 @@
 # ┌─────────────────────────────────────────────────────────────────────────┐
-# │             FICHIER: /_config.yml                                       │
+# │  FICHIER : _config.yml – configuration Jekyll                          │
 # └─────────────────────────────────────────────────────────────────────────┘
 
 # 1. Informations générales
-title: "Cyprien – Programmatic SEO"  
-lang: fr-FR  
+title: "Cyprien – Programmatic SEO"
+lang: fr-FR
 markdown: kramdown
 
-# 2. URL + BaseURL (indispensable pour que Jekyll génère des liens corrects)
-url: "https://cypskippy.github.io"    # ta racine publique (sans slash final)
-baseurl: "/tips"                      # le sous-répertoire GitHub Pages
+# 2. URL de production (sans slash final) et baseurl (sous-répertoire GitHub Pages)
+url: "https://cypskippy.github.io"
+baseurl: "/tips"               # si tu publies dans la racine, mets ""
 
-# 3. Plugins pour sitemap et balises SEO
+# 3. Plugins officiels activés
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-
-# 4. Permalink global par défaut (utilisé si un fichier n'a pas de front matter spécifique)
+# 4. Permalien par défaut pour les pages/collections sans front-matter spécifique
 permalink: /:title/
 
-# 5. Définition de la "collection" pages
+# 5. Déclaration de la collection “tips” (les fichiers dans _tips/)
 collections:
   tips:
     output: true
     permalink: /tips/:path/
+
+# 6. Valeurs par défaut appliquées aux documents de la collection
 defaults:
   - scope:
       path: ""
       type: tips
     values:
       layout: page
-    
-yml\ncollections:\n tips:\n output: true\n permalink: /tips/:path/\n
-
-
-
-
-# 7. (Optionnel) Configuration additionnelle pour SEO
-#    Par exemple, si tu veux un logo, des meta “twitter”, etc. Tu peux garder ce bloc pour plus tard.
- 
-
