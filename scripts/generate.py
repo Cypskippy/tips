@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""generate.py
 
-Generate Markdown articles from keywords.csv using OpenAI.
-Steps:
+# -*- coding: utf-8 -*-
+
+"""generate.py – create Markdown articles from keywords.csv via OpenAI.
+
+Process:
 
 1. Read keywords.csv (one keyword per line).
-2. Call the model (LLM\_MODEL, default gpt-4o-mini) for each keyword.
-3. Check that the keyword appears ≥ 3 times; retry up to 3 times.
-4. Save the article to \_tips/<slug>.md with YAML front‑matter.
-5. Add `robots: noindex` if the article has < 600 words.
+2. For each keyword, call the model (LLM\_MODEL env var, default gpt-4o-mini).
+3. Accept the result if the keyword appears at least 3 times; otherwise retry 2×.
+4. Write the article to \_tips/<slug>.md with YAML front‑matter.
+5. Add `robots: noindex` when the article is under 600 words.
 
-Progress is printed for every keyword so GitHub Actions logs stay alive.
+Progress is printed so GitHub Actions logs stay active.
 """
 
 from **future** import annotations
@@ -22,7 +24,7 @@ from pathlib import Path
 from typing import Final
 
 from bs4 import BeautifulSoup  # pip install beautifulsoup4
-import markdown                # pip install Markdown
+import markdown                 # pip install Markdown
 from openai import OpenAI, OpenAIError  # pip install openai
 
 # ---------------------------------------------------------------------------
@@ -49,7 +51,7 @@ OUTPUT\_DIR.mkdir(parents=True, exist\_ok=True)
 # ---------------------------------------------------------------------------
 
 def call\_llm(prompt: str) -> str:
-"""Call the chat model with a 60‑second timeout."""
+"""Call the chat model with a 60‑second timeout and return the text."""
 try:
 resp = client.chat.completions.create(
 model=MODEL,
@@ -59,7 +61,7 @@ timeout=60,
 )
 return resp.choices\[0].message.content.strip()
 except OpenAIError as err:
-print(f"⚠️  OpenAI error: {err}")
+print(f"⚠️ OpenAI error: {err}")
 return ""
 
 # ---------------------------------------------------------------------------
