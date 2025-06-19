@@ -56,7 +56,7 @@ permalink: /
 
 <!-- ---------- Liste complète triée ----------- -->
 <ul>
-{% assign pages_tips = site.tips | sort: 'date' | reverse %}
+{% assign tips_list = site.tips | where: "date" | sort: "date" %}
 {% if pages_tips.size > 0 %}
   {% for doc in pages_tips %}
     <li>
