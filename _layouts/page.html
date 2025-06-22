@@ -1,29 +1,30 @@
-html <!-- Start CookieYes CMP -->
-<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/a6cfa4c21a1d6c2f566f0bd5/script.js">
-</script> <!-- End CookieYes CMP -->
-<!-- ┌─────────────────────────────────────────────────────────────────────────┐ -->
-<!-- │                 FICHIER: /_layouts/page.html                            │ -->
-<!-- └─────────────────────────────────────────────────────────────────────────┘ -->
+<!-- Start CookieYes CMP -->
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/a6cfa4c21a1d6c2f566f0bd5/script.js"></script>
+<!-- End CookieYes CMP -->
+
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'fr-FR' }}">
 <head>
-  
-
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Preconnects for faster AdSense & better CWV -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://tpc.googlesyndication.com">
 
   <title>{{ page.title }} | {{ site.title }}</title>
   {% seo %}
 
-  <!-- =========== Google AdSense snippet (insérer ton ID client) =========== -->
-  <script async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9402824549128224"
-        crossorigin="anonymous"></script>
-  <!-- ======================================================================== -->
+  <!-- Google AdSense (bloqué tant que l’utilisateur n’a pas accepté la catégorie “advertisement”) -->
+  <script type="text/plain"
+          data-cookieyes="advertisement"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9402824549128224"
+          crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
   <style>
-
     body {
       font-family: sans-serif;
       line-height: 1.6;
@@ -37,35 +38,27 @@ html <!-- Start CookieYes CMP -->
       text-align: center;
       margin: 20px 0;
     }
+    .disclaimer {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 2rem;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 1rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <button class="nav-toggle" aria-label="Afficher le menu">☰</button>
-    <h2><a href="{{ site.baseurl }}/" style="text-decoration:none; color:inherit;">
-      {{ site.title }}
-    </a></h2>
-    
+    <h2><a href="{{ site.baseurl }}/" style="text-decoration:none; color:inherit;">{{ site.title }}</a></h2>
 
-<nav class="site-nav"; style="margin-top:8px; text-align:center;">
-  
-  <ul style="list-style:none; padding:0; display:inline-flex; gap:16px;">
-    <li>
-      <a href="{{ site.baseurl }}/" style="text-decoration:none; font-weight:bold;">
-        Accueil
-      </a>
-    </li>
-    <li>
-      <a href="{{ site.baseurl }}/" style="text-decoration:none;">
-        Toutes les pages
-      </a>
-    </li>
-   
-  </ul>
-</nav>
-<hr/>
-
-    
+    <nav class="site-nav" style="margin-top:8px; text-align:center;">
+      <ul style="list-style:none; padding:0; display:inline-flex; gap:16px;">
+        <li><a href="{{ site.baseurl }}/" style="text-decoration:none; font-weight:bold;">Accueil</a></li>
+        <li><a href="{{ site.baseurl }}/" style="text-decoration:none;">Toutes les pages</a></li>
+      </ul>
+    </nav>
+    <hr/>
   </header>
 
   <main>
@@ -76,12 +69,14 @@ html <!-- Start CookieYes CMP -->
       <!-- Bloc pub (après H2) -->
       <div class="ad-container-top">
         <ins class="adsbygoogle"
+             data-cookieyes="advertisement"
              style="display:block"
              data-ad-client="ca-pub-9402824549128224"
              data-ad-slot="5651044206"
              data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
+             data-full-width-responsive="true"
+             loading="lazy"></ins>
+        <script type="text/plain" data-cookieyes="advertisement">
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
       </div>
@@ -90,40 +85,42 @@ html <!-- Start CookieYes CMP -->
       <!-- Contenu généré par Jekyll depuis _pages/*.md -->
       {{ content }}
 
+      <div class="disclaimer">
+        <em>Les informations contenues dans cet article sont fournies à titre informatif et ne sauraient se substituer à des conseils professionnels personnalisés.</em>
+      </div>
+
       <!-- Bloc publicitaire #2 (en bas de page) -->
       <div class="ad-container-bottom">
         <ins class="adsbygoogle"
+             data-cookieyes="advertisement"
              style="display:block"
              data-ad-client="ca-pub-9402824549128224"
              data-ad-slot="4361179117"
              data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
+             data-full-width-responsive="true"
+             loading="lazy"></ins>
+        <script type="text/plain" data-cookieyes="advertisement">
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
       </div>
     </article>
   </main>
 
-  <!-- ─── Injection “au milieu” du contenu (après 3ᵉ paragraphe) ─── -->
- <!-- Charger et exécuter le JavaScript d’injection (après tout le contenu) -->
-<script src="{{ '/assets/js/ads-inject.js' | relative_url }}"></script>
-
+  <!-- Script d’injection “au milieu” (différé) -->
+  <script defer src="{{ '/assets/js/ads-inject.js' | relative_url }}"></script>
 
   <footer class="site-footer">
-  <nav class="legal-links">
-    <a href="{{ '/mentions-legales/' | relative_url }}">Mentions légales</a> •
-    <a href="{{ '/confidentialite/'   | relative_url }}">Confidentialité & cookies</a> •
-    <a href="{{ '/contact/'           | relative_url }}">Contact</a> •
-    <a href="{{ '/a-propos/'          | relative_url }}">À propos</a>
-  </nav>
+    <nav class="legal-links">
+      <a href="{{ '/mentions-legales/' | relative_url }}">Mentions légales</a> •
+      <a href="{{ '/confidentialite/'   | relative_url }}">Confidentialité & cookies</a> •
+      <a href="{{ '/contact/'           | relative_url }}">Contact</a> •
+      <a href="{{ '/a-propos/'          | relative_url }}">À propos</a>
+    </nav>
 
-  <!-- Lien CMP CookieYes -->
-  <a id="cky-btn" href="javascript:void(0);">Gérer mes cookies</a>
+    <!-- Lien CMP CookieYes -->
+    <a id="cky-btn" href="javascript:void(0);">Gérer mes cookies</a>
 
-  <p class="copyright">
-    © {{ 'now' | date: '%Y' }} Cyprien — Tous droits réservés
-  </p>
-</footer>
+    <p class="copyright">© {{ 'now' | date: '%Y' }} Cyprien — Tous droits réservés</p>
+  </footer>
 </body>
 </html>
