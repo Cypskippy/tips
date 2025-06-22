@@ -3,10 +3,14 @@
 <!-- End CookieYes CMP -->
 
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'fr-FR' }}">
+<html lang="{{ site.lang | default: 'fr-FR' }}" data-theme="light">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' https://*.ggpht.com https://tpc.googlesyndication.com https://pagead2.googlesyndication.com data:; script-src 'self' https://*.googlesyndication.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;">
 
   <!-- Preconnects for faster AdSense & better CWV -->
   <link rel="preconnect" href="https://pagead2.googlesyndication.com">
@@ -15,7 +19,7 @@
   <title>{{ page.title }} | {{ site.title }}</title>
   {% seo %}
 
-  <!-- Google AdSense (bloqué tant que l’utilisateur n’a pas accepté la catégorie “advertisement”) -->
+  <!-- Google AdSense (chargé seulement après consentement) -->
   <script type="text/plain"
           data-cookieyes="advertisement"
           async
@@ -25,18 +29,32 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
   <style>
+    :root { color-scheme: light dark; }
     body {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       line-height: 1.6;
       margin: 0;
       padding: 0;
+      background: #ffffff;
+      color: #333;
+      transition: background .3s ease, color .3s ease;
     }
     header, footer { background: #f4f4f4; padding: 10px 20px; }
+    @media (prefers-color-scheme: dark) {
+      body { background:#121212; color:#e7e7e7; }
+      header, footer { background:#1e1e1e; }
+    }
+
+    /* Sticky header */
+    header { position: sticky; top: 0; z-index: 999; }
+
     main { max-width: 800px; margin: 20px auto; padding: 0 15px; }
     h1 { margin-bottom: 0.5em; }
-    .ad-container-top, .ad-container-bottom {
+
+    .ad-container-top, .ad-container-bottom, .injected-ad {
       text-align: center;
       margin: 20px 0;
+      min-height: 280px; /* réserve l’espace -> CLS zéro */
     }
     .disclaimer {
       font-size: 0.85rem;
@@ -66,7 +84,7 @@
       <h1>{{ page.title }}</h1>
 
       {% if page.wordcount and page.wordcount > 800 %}
-      <!-- Bloc pub (après H2) -->
+      <!-- Pub top -->
       <div class="ad-container-top">
         <ins class="adsbygoogle"
              data-cookieyes="advertisement"
@@ -76,38 +94,74 @@
              data-ad-format="auto"
              data-full-width-responsive="true"
              loading="lazy"></ins>
-        <script type="text/plain" data-cookieyes="advertisement">
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
       </div>
       {% endif %}
 
-      <!-- Contenu généré par Jekyll depuis _pages/*.md -->
+      <!-- Contenu généré -->
       {{ content }}
 
       <div class="disclaimer">
         <em>Les informations contenues dans cet article sont fournies à titre informatif et ne sauraient se substituer à des conseils professionnels personnalisés.</em>
       </div>
 
-      <!-- Bloc publicitaire #2 (en bas de page) -->
+      <!-- Pub bottom : multiplex -->
       <div class="ad-container-bottom">
         <ins class="adsbygoogle"
              data-cookieyes="advertisement"
              style="display:block"
              data-ad-client="ca-pub-9402824549128224"
              data-ad-slot="4361179117"
-             data-ad-format="auto"
+             data-ad-format="autorelaxed"
              data-full-width-responsive="true"
              loading="lazy"></ins>
-        <script type="text/plain" data-cookieyes="advertisement">
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
       </div>
     </article>
   </main>
 
-  <!-- Script d’injection “au milieu” (différé) -->
-  <script defer src="{{ '/assets/js/ads-inject.js' | relative_url }}"></script>
+  <!-- Lazy‑load des publicités quand 50 % visibles -->
+  <script data-cookieyes="advertisement" type="text/plain">
+    document.addEventListener('DOMContentLoaded', function(){
+      const ads = document.querySelectorAll('ins.adsbygoogle[data-cookieyes=\"advertisement\"]');
+      if(!('IntersectionObserver' in window)){ ads.forEach(ad => (adsbygoogle=window.adsbygoogle||[]).push({})); return; }
+      const io = new IntersectionObserver((entries,observer)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting && entry.intersectionRatio >= 0.5){
+            (adsbygoogle=window.adsbygoogle||[]).push({});
+            observer.unobserve(entry.target);
+          }
+        });
+      },{rootMargin:'100px 0px', threshold:0.5});
+      ads.forEach(ad=>io.observe(ad));
+    });
+  </script>
+
+  <!-- Prefetch de la prochaine page quand le lecteur arrive à 80 % -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const sentinel = document.createElement('div');
+      sentinel.style.height='1px';
+      document.body.appendChild(sentinel);
+      const io = new IntersectionObserver((entries)=>{
+        if(entries[0].isIntersecting){
+          const next = document.querySelector('a[rel=\"next\"]');
+          if(next){
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = next.href;
+            document.head.appendChild(link);
+          }
+        }
+      },{threshold:0, rootMargin:'0px 0px -20% 0px'});
+      io.observe(sentinel);
+    });
+  </script>
+
+  <!-- Register service‑worker (cache static) -->
+  <script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('{{ '/sw.js' | relative_url }}').catch(console.error);
+    }
+  </script>
 
   <footer class="site-footer">
     <nav class="legal-links">
@@ -122,5 +176,14 @@
 
     <p class="copyright">© {{ 'now' | date: '%Y' }} Cyprien — Tous droits réservés</p>
   </footer>
+
+  <!-- Schema.org FAQ (placeholder) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": []
+  }
+  </script>
 </body>
 </html>
