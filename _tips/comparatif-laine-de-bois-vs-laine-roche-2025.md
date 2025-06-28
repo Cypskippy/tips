@@ -1,7 +1,7 @@
 ---
 title: Comparatif Laine De Bois Vs Laine Roche 2025
-date: 2025-06-27
-last_updated: 2025-06-27
+date: 2025-06-28
+last_updated: 2025-06-28
 wordcount: 14
 robots: noindex
 ---
