@@ -1,7 +1,7 @@
 ---
 title: Fenetre Triple Vitrage Avantage Inconvénient
-date: 2025-07-02
-last_updated: 2025-07-02
+date: 2025-07-03
+last_updated: 2025-07-03
 wordcount: 11
 robots: noindex
 ---

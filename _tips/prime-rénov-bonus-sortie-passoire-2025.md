@@ -1,89 +1,92 @@
 ---
 title: Prime Rénov Bonus Sortie Passoire 2025
-date: 2025-07-02
-last_updated: 2025-07-02
-wordcount: 859
+date: 2025-07-03
+last_updated: 2025-07-03
+wordcount: 1054
 ---
 
 # Prime Rénov : Bonus Sortie Passoire 2025
 
-La transition énergétique est au cœur des préoccupations actuelles, tant pour les particuliers que pour les collectivités. En France, le gouvernement a mis en place plusieurs dispositifs pour encourager la rénovation énergétique des logements. Parmi ces initiatives, la Prime Rénov et le Bonus Sortie Passoire, qui entrera en vigueur en 2025, se distinguent par leur objectif ambitieux : sortir les logements considérés comme des "passoires thermiques" du parc immobilier français.
+La transition énergétique est au cœur des préoccupations des gouvernements européens, et la France ne fait pas exception. Dans ce contexte, le dispositif de la Prime Rénov, mis en place pour encourager les travaux de rénovation énergétique, joue un rôle crucial. En 2025, un nouveau volet de cette prime, le « Bonus Sortie Passoire », sera introduit pour inciter les propriétaires à rénover les logements énergivores. Cet article explore les détails de cette initiative, ses objectifs et son impact potentiel sur le marché de l'immobilier.
 
 ## Qu'est-ce que la Prime Rénov ?
 
-La Prime Rénov est une aide financière mise en place par l'État français pour encourager les travaux de rénovation énergétique dans les logements. Elle a été lancée en janvier 2021 et remplace le crédit d'impôt pour la transition énergétique (CITE). Cette prime est accessible à tous les propriétaires, qu'ils soient occupants ou bailleurs, ainsi qu'aux copropriétés.
+La Prime Rénov est une aide financière destinée à soutenir les propriétaires dans leurs projets de rénovation énergétique. Lancée en janvier 2021, elle remplace le crédit d'impôt pour la transition énergétique (CITE) et vise à simplifier l'accès aux aides tout en élargissant leur portée. La Prime Rénov est accessible à tous les propriétaires, qu'ils soient occupants ou bailleurs, et est calculée en fonction des revenus et de la nature des travaux réalisés.
 
 ### Les objectifs de la Prime Rénov
 
-L'objectif principal de la Prime Rénov est de réduire la consommation d'énergie des logements en incitant les propriétaires à réaliser des travaux d'amélioration énergétique. Cela inclut l'isolation des murs, des toits, des fenêtres, ainsi que le remplacement des systèmes de chauffage vétustes par des équipements plus performants.
+Les principaux objectifs de la Prime Rénov sont :
 
-### Qui peut bénéficier de la Prime Rénov ?
-
-La Prime Rénov est accessible à tous les propriétaires, qu'ils soient occupants ou bailleurs. Les ménages peuvent également bénéficier de cette aide, quel que soit leur niveau de revenus. Toutefois, le montant de la prime varie en fonction des ressources du foyer et de la nature des travaux réalisés.
+- **Réduire la consommation énergétique des logements** : En incitant les propriétaires à réaliser des travaux d'isolation, de chauffage ou de ventilation, le dispositif vise à diminuer la consommation d'énergie des habitations.
+- **Améliorer le confort des occupants** : Des logements mieux isolés et équipés de systèmes de chauffage performants offrent un meilleur confort thermique.
+- **Lutter contre la précarité énergétique** : En aidant les ménages à faibles revenus à améliorer leur logement, la Prime Rénov contribue à réduire les inégalités sociales.
 
 ## Le Bonus Sortie Passoire : Qu'est-ce que c'est ?
 
-Le Bonus Sortie Passoire est une mesure complémentaire à la Prime Rénov, qui sera mise en place à partir de 2025. Son but est de cibler spécifiquement les logements classés F ou G sur l'étiquette énergétique, souvent appelés "passoires thermiques". Ces logements sont particulièrement énergivores et contribuent de manière significative aux émissions de gaz à effet de serre.
+Le Bonus Sortie Passoire est une nouvelle mesure qui sera introduite en 2025 dans le cadre de la Prime Rénov. Son objectif principal est d'inciter les propriétaires de logements classés « passoires thermiques » à entreprendre des travaux de rénovation. Un logement est considéré comme une passoire thermique lorsqu'il obtient une note inférieure à E sur le diagnostic de performance énergétique (DPE).
 
 ### Pourquoi un Bonus Sortie Passoire ?
 
-La France s'est engagée à réduire ses émissions de gaz à effet de serre et à atteindre la neutralité carbone d'ici 2050. Pour y parvenir, il est essentiel de rénover le parc immobilier, notamment les logements les plus énergivores. Le Bonus Sortie Passoire vise à encourager les propriétaires de ces logements à entreprendre des travaux de rénovation afin d'améliorer leur performance énergétique.
+La France compte encore des millions de logements classés F ou G, qui consomment une quantité excessive d'énergie et émettent une grande quantité de gaz à effet de serre. Le gouvernement a donc décidé de mettre en place ce bonus pour :
 
-## Les modalités du Bonus Sortie Passoire
+- **Accélérer la rénovation des logements énergivores** : En offrant une aide financière supplémentaire, le gouvernement espère inciter les propriétaires à agir rapidement.
+- **Atteindre les objectifs climatiques** : La France s'est engagée à réduire ses émissions de gaz à effet de serre et à atteindre la neutralité carbone d'ici 2050. La rénovation des passoires thermiques est essentielle pour atteindre cet objectif.
+- **Améliorer la qualité de vie** : En rénovant ces logements, les occupants bénéficieront d'un meilleur confort et d'une réduction de leurs factures d'énergie.
+
+## Comment bénéficier du Bonus Sortie Passoire ?
 
 ### Conditions d'éligibilité
 
-Pour bénéficier du Bonus Sortie Passoire, les propriétaires devront répondre à certaines conditions. Tout d'abord, le logement doit être classé F ou G sur l'étiquette énergétique. De plus, les travaux réalisés doivent permettre d'atteindre au moins la classe D après rénovation.
+Pour bénéficier du Bonus Sortie Passoire, les propriétaires devront répondre à certaines conditions :
 
-### Montant du Bonus
+1. **Propriétaire d'un logement classé F ou G** : Seuls les logements ayant un DPE inférieur à E pourront bénéficier de cette aide.
+2. **Réalisation de travaux de rénovation** : Les travaux doivent permettre d'atteindre un niveau de performance énergétique au moins égal à E.
+3. **Respect des normes** : Les travaux doivent être réalisés par des professionnels certifiés RGE (Reconnu Garant de l’Environnement).
 
-Le montant du Bonus Sortie Passoire n'est pas encore définitif, mais il devrait être significatif afin d'inciter les propriétaires à agir. Ce bonus pourrait venir s'ajouter à la Prime Rénov, permettant ainsi de réduire considérablement le coût des travaux de rénovation.
+### Montant du bonus
+
+Le montant du Bonus Sortie Passoire n'est pas encore définitivement établi, mais il devrait être significatif pour inciter les propriétaires à agir. Ce bonus pourrait être cumulé avec d'autres aides, comme les certificats d'économies d'énergie (CEE) ou les aides de l'ANAH (Agence Nationale de l'Habitat).
 
 ## Les travaux éligibles
 
-Les travaux éligibles pour bénéficier du Bonus Sortie Passoire incluront, entre autres :
+Les travaux éligibles pour bénéficier du Bonus Sortie Passoire incluent :
 
-- L'isolation des murs, des combles et des planchers
-- Le remplacement des fenêtres et des portes
-- La mise en place de systèmes de chauffage performants (pompes à chaleur, chaudières à condensation, etc.)
-- L'installation de panneaux solaires
+- **Isolation des murs, des toits et des planchers** : Ces travaux permettent de réduire les pertes de chaleur et d'améliorer le confort thermique.
+- **Remplacement des systèmes de chauffage** : L'installation de chaudières à haute performance énergétique, de pompes à chaleur ou de systèmes de chauffage au bois peut contribuer à réduire la consommation d'énergie.
+- **Amélioration de la ventilation** : Des systèmes de ventilation performants permettent de garantir une bonne qualité de l'air intérieur tout en limitant les déperditions de chaleur.
 
-## Les avantages de la Prime Rénov et du Bonus Sortie Passoire
+## Impact du Bonus Sortie Passoire sur le marché immobilier
 
-### Pour les propriétaires
+### Valorisation des biens
 
-Les propriétaires qui entreprennent des travaux de rénovation énergétique peuvent bénéficier de plusieurs avantages :
+La mise en œuvre du Bonus Sortie Passoire pourrait avoir un impact significatif sur la valorisation des biens immobiliers. Les logements rénovés, avec une meilleure performance énergétique, seront plus attractifs sur le marché. Les acheteurs seront de plus en plus sensibles à la consommation énergétique des logements, ce qui pourrait entraîner une hausse des prix pour les biens rénovés et une baisse pour les passoires thermiques.
 
-- **Économies d'énergie** : Une meilleure performance énergétique se traduit par des factures de chauffage réduites.
-- **Valorisation du patrimoine** : Un logement rénové est plus attractif sur le marché immobilier.
-- **Aides financières** : La combinaison de la Prime Rénov et du Bonus Sortie Passoire peut alléger considérablement le coût des travaux.
+### Encouragement à la rénovation
 
-### Pour l'environnement
-
-La rénovation des logements énergivores contribue à la réduction des émissions de gaz à effet de serre, participant ainsi à la lutte contre le changement climatique. En améliorant l'efficacité énergétique des bâtiments, la France peut atteindre ses objectifs climatiques et réduire sa dépendance aux énergies fossiles.
+Le Bonus Sortie Passoire pourrait également encourager les propriétaires à entreprendre des travaux de rénovation, même au-delà des logements classés F ou G. En effet, la prise de conscience des enjeux énergétiques et environnementaux pourrait inciter davantage de propriétaires à améliorer la performance énergétique de leur logement.
 
 ## Conclusion
 
-La Prime Rénov et le Bonus Sortie Passoire représentent des leviers essentiels pour la transition énergétique en France. Alors que le pays s'engage vers un avenir plus durable, ces dispositifs offrent aux propriétaires une opportunité unique de rénover leurs logements tout en bénéficiant d'aides financières considérables. En 2025, le Bonus Sortie Passoire viendra renforcer cette dynamique, incitant les propriétaires de passoires thermiques à agir pour un habitat plus économe en énergie.
+La Prime Rénov et son nouveau volet, le Bonus Sortie Passoire, représentent une avancée significative dans la lutte contre la précarité énergétique et la transition vers une économie plus verte. En incitant les propriétaires à rénover leurs logements énergivores, ces mesures visent à améliorer le confort des occupants tout en contribuant à la réduction des émissions de gaz à effet de serre. La mise en œuvre de ces dispositifs sera cruciale pour atteindre les objectifs climatiques de la France et améliorer la qualité de vie des citoyens.
 
 ## FAQ
 
 ### Qu'est-ce que la Prime Rénov ?
 
-La Prime Rénov est une aide financière de l'État français destinée à encourager les travaux de rénovation énergétique dans les logements.
+La Prime Rénov est une aide financière destinée à soutenir les propriétaires dans leurs projets de rénovation énergétique.
 
-### Qui peut bénéficier de la Prime Rénov ?
+### Qui peut bénéficier du Bonus Sortie Passoire ?
 
-Tous les propriétaires, qu'ils soient occupants ou bailleurs, ainsi que les copropriétés, peuvent bénéficier de la Prime Rénov.
+Les propriétaires de logements classés F ou G sur le diagnostic de performance énergétique (DPE) peuvent bénéficier du Bonus Sortie Passoire.
 
-### Qu'est-ce que le Bonus Sortie Passoire ?
+### Quels types de travaux sont éligibles au Bonus Sortie Passoire ?
 
-Le Bonus Sortie Passoire est une aide complémentaire à la Prime Rénov, visant à encourager la rénovation des logements classés F ou G sur l'étiquette énergétique.
+Les travaux d'isolation, de remplacement de systèmes de chauffage et d'amélioration de la ventilation sont éligibles.
 
-### Quels travaux sont éligibles au Bonus Sortie Passoire ?
+### Comment faire une demande de Bonus Sortie Passoire ?
 
-Les travaux éligibles incluent l'isolation, le remplacement des fenêtres, et l'installation de systèmes de chauffage performants.
+Les demandes se feront via la plateforme dédiée à la Prime Rénov, où les propriétaires devront fournir les justificatifs nécessaires.
 
-### Quand le Bonus Sortie Passoire sera-t-il disponible ?
+### Quel est l'impact du Bonus Sortie Passoire sur la valorisation des biens immobiliers ?
 
-Le Bonus Sortie Passoire sera mis en place à partir de 2025.
+Les logements rénovés devraient voir leur valeur augmenter, tandis que les passoires thermiques pourraient perdre de la valeur sur le marché.
