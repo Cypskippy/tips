@@ -1,7 +1,7 @@
 ---
 title: Fenetre Pvc Double Vitrage Prime 2025
-date: 2025-08-22
-last_updated: 2025-08-22
+date: 2025-08-23
+last_updated: 2025-08-23
 wordcount: 12
 robots: noindex
 ---
