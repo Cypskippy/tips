@@ -1,7 +1,7 @@
 ---
 title: Pret Vert Bnp Renovation Energetique Taux 2025
-date: 2025-10-23
-last_updated: 2025-10-23
+date: 2025-10-24
+last_updated: 2025-10-24
 wordcount: 13
 robots: noindex
 ---
