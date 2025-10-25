@@ -1,7 +1,7 @@
 ---
 title: Passoire Thermique Amende 2025
-date: 2025-10-24
-last_updated: 2025-10-24
+date: 2025-10-25
+last_updated: 2025-10-25
 wordcount: 10
 robots: noindex
 ---
