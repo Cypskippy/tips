@@ -1,7 +1,7 @@
 ---
 title: Barème Revenus Très Modestes Maprimerenov 2025
-date: 2025-10-29
-last_updated: 2025-10-29
+date: 2025-10-30
+last_updated: 2025-10-30
 wordcount: 12
 robots: noindex
 ---
