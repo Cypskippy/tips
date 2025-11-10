@@ -1,7 +1,7 @@
 ---
 title: Consommation Kwh M2 Appartement Annee 1970
-date: 2025-11-09
-last_updated: 2025-11-09
+date: 2025-11-10
+last_updated: 2025-11-10
 wordcount: 12
 robots: noindex
 ---
