@@ -1,7 +1,7 @@
 ---
 title: Panneau Solaire Balcon Aide 2025
-date: 2025-11-16
-last_updated: 2025-11-16
+date: 2025-11-17
+last_updated: 2025-11-17
 wordcount: 11
 robots: noindex
 ---
