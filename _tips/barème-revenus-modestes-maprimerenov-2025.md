@@ -1,7 +1,7 @@
 ---
 title: Barème Revenus Modestes Maprimerenov 2025
-date: 2025-12-03
-last_updated: 2025-12-03
+date: 2025-12-04
+last_updated: 2025-12-04
 wordcount: 11
 robots: noindex
 ---
