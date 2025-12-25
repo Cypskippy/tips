@@ -1,7 +1,7 @@
 ---
 title: Consommation Kwh M2 Maison Rt2005
-date: 2025-12-24
-last_updated: 2025-12-24
+date: 2025-12-25
+last_updated: 2025-12-25
 wordcount: 11
 robots: noindex
 ---
