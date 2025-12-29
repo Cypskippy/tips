@@ -1,7 +1,7 @@
 ---
 title: Rachat Edf Oa Tarif 2025
-date: 2025-12-28
-last_updated: 2025-12-28
+date: 2025-12-29
+last_updated: 2025-12-29
 wordcount: 11
 robots: noindex
 ---
