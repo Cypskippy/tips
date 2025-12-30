@@ -1,7 +1,7 @@
 ---
 title: Classement Energetique Maison Ancienne 2025
-date: 2025-12-29
-last_updated: 2025-12-29
+date: 2025-12-30
+last_updated: 2025-12-30
 wordcount: 11
 robots: noindex
 ---
