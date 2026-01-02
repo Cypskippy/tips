@@ -1,7 +1,7 @@
 ---
 title: Assurance Dommage Ouvrage Renovation Energetique
-date: 2026-01-01
-last_updated: 2026-01-01
+date: 2026-01-02
+last_updated: 2026-01-02
 wordcount: 11
 robots: noindex
 ---
