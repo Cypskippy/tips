@@ -1,7 +1,7 @@
 ---
 title: Isolation Combles 1 Euro 2025 Encore Possible
-date: 2026-01-04
-last_updated: 2026-01-04
+date: 2026-01-05
+last_updated: 2026-01-05
 wordcount: 13
 robots: noindex
 ---
