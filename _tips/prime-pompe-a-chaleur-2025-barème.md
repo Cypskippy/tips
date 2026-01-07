@@ -1,7 +1,7 @@
 ---
 title: Prime Pompe A Chaleur 2025 Barème
-date: 2026-01-06
-last_updated: 2026-01-06
+date: 2026-01-07
+last_updated: 2026-01-07
 wordcount: 12
 robots: noindex
 ---
