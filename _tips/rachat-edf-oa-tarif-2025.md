@@ -1,7 +1,7 @@
 ---
 title: Rachat Edf Oa Tarif 2025
-date: 2026-01-08
-last_updated: 2026-01-08
+date: 2026-01-09
+last_updated: 2026-01-09
 wordcount: 11
 robots: noindex
 ---
