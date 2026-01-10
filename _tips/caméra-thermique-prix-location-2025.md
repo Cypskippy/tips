@@ -1,7 +1,7 @@
 ---
 title: Caméra Thermique Prix Location 2025
-date: 2026-01-09
-last_updated: 2026-01-09
+date: 2026-01-10
+last_updated: 2026-01-10
 wordcount: 11
 robots: noindex
 ---
