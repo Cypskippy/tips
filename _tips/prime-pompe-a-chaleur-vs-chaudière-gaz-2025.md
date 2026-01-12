@@ -1,7 +1,7 @@
 ---
 title: Prime Pompe A Chaleur Vs Chaudière Gaz 2025
-date: 2026-01-11
-last_updated: 2026-01-11
+date: 2026-01-12
+last_updated: 2026-01-12
 wordcount: 14
 robots: noindex
 ---
