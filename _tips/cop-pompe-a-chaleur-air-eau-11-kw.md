@@ -1,7 +1,7 @@
 ---
 title: Cop Pompe A Chaleur Air Eau 11 Kw
-date: 2026-01-16
-last_updated: 2026-01-16
+date: 2026-01-17
+last_updated: 2026-01-17
 wordcount: 14
 robots: noindex
 ---
