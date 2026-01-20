@@ -1,7 +1,7 @@
 ---
 title: Rentabilité Pompe A Chaleur 150 M2
-date: 2026-01-19
-last_updated: 2026-01-19
+date: 2026-01-20
+last_updated: 2026-01-20
 wordcount: 12
 robots: noindex
 ---

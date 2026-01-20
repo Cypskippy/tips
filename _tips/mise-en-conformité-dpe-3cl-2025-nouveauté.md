@@ -1,7 +1,7 @@
 ---
 title: Mise En Conformité Dpe 3Cl 2025 Nouveauté
-date: 2026-01-19
-last_updated: 2026-01-19
+date: 2026-01-20
+last_updated: 2026-01-20
 wordcount: 13
 robots: noindex
 ---
