@@ -1,7 +1,7 @@
 ---
 title: Pont Thermique Toiture Comment Détecter 2025
-date: 2026-01-23
-last_updated: 2026-01-23
+date: 2026-01-24
+last_updated: 2026-01-24
 wordcount: 12
 robots: noindex
 ---
