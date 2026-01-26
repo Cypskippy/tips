@@ -1,7 +1,7 @@
 ---
 title: Reglementation Gaine Vmc Combles 2025
-date: 2026-01-25
-last_updated: 2026-01-25
+date: 2026-01-26
+last_updated: 2026-01-26
 wordcount: 11
 robots: noindex
 ---

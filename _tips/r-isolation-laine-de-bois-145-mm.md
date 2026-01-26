@@ -1,7 +1,7 @@
 ---
 title: R Isolation Laine De Bois 145 Mm
-date: 2026-01-25
-last_updated: 2026-01-25
+date: 2026-01-26
+last_updated: 2026-01-26
 wordcount: 13
 robots: noindex
 ---
