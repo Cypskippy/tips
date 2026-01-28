@@ -1,7 +1,7 @@
 ---
 title: Cumul Maprimerenov Et Cee Plafond 2025
-date: 2026-01-27
-last_updated: 2026-01-27
+date: 2026-01-28
+last_updated: 2026-01-28
 wordcount: 12
 robots: noindex
 ---
