@@ -1,7 +1,7 @@
 ---
 title: Eco Ptz Bouquet Travaux Simulateur 2025
-date: 2026-02-03
-last_updated: 2026-02-03
+date: 2026-02-04
+last_updated: 2026-02-04
 wordcount: 12
 robots: noindex
 ---
