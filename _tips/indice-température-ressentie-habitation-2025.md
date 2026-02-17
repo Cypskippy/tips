@@ -1,7 +1,7 @@
 ---
 title: Indice Température Ressentie Habitation 2025
-date: 2026-02-16
-last_updated: 2026-02-16
+date: 2026-02-17
+last_updated: 2026-02-17
 wordcount: 11
 robots: noindex
 ---
