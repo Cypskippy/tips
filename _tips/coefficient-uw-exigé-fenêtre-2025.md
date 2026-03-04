@@ -1,7 +1,7 @@
 ---
 title: Coefficient Uw Exigé Fenêtre 2025
-date: 2026-03-03
-last_updated: 2026-03-03
+date: 2026-03-04
+last_updated: 2026-03-04
 wordcount: 11
 robots: noindex
 ---
