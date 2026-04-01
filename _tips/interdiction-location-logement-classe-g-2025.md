@@ -1,7 +1,7 @@
 ---
 title: Interdiction Location Logement Classe G 2025
-date: 2026-03-31
-last_updated: 2026-03-31
+date: 2026-04-01
+last_updated: 2026-04-01
 wordcount: 12
 robots: noindex
 ---
