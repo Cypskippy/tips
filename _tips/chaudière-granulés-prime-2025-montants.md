@@ -1,7 +1,7 @@
 ---
 title: Chaudière Granulés Prime 2025 Montants
-date: 2026-04-01
-last_updated: 2026-04-01
+date: 2026-04-02
+last_updated: 2026-04-02
 wordcount: 11
 robots: noindex
 ---
