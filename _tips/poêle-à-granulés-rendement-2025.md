@@ -1,7 +1,7 @@
 ---
 title: Poêle À Granulés Rendement 2025
-date: 2026-04-06
-last_updated: 2026-04-06
+date: 2026-04-07
+last_updated: 2026-04-07
 wordcount: 11
 robots: noindex
 ---
