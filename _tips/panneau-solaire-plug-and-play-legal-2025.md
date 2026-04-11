@@ -1,7 +1,7 @@
 ---
 title: Panneau Solaire Plug And Play Legal 2025
-date: 2026-04-10
-last_updated: 2026-04-10
+date: 2026-04-11
+last_updated: 2026-04-11
 wordcount: 13
 robots: noindex
 ---
