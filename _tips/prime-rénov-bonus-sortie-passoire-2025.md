@@ -1,7 +1,7 @@
 ---
 title: Prime Rénov Bonus Sortie Passoire 2025
-date: 2026-04-14
-last_updated: 2026-04-14
+date: 2026-04-15
+last_updated: 2026-04-15
 wordcount: 12
 robots: noindex
 ---
