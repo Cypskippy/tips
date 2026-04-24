@@ -1,7 +1,7 @@
 ---
 title: Prime Poêle À Bois Flamme Verte 2025
-date: 2026-04-23
-last_updated: 2026-04-23
+date: 2026-04-24
+last_updated: 2026-04-24
 wordcount: 13
 robots: noindex
 ---
