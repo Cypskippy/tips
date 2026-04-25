@@ -1,7 +1,7 @@
 ---
 title: Rentabilité Panneau Solaire Autoconsommation 3Kw
-date: 2026-04-24
-last_updated: 2026-04-24
+date: 2026-04-25
+last_updated: 2026-04-25
 wordcount: 11
 robots: noindex
 ---
