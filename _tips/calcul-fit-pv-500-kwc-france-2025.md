@@ -1,7 +1,7 @@
 ---
 title: Calcul Fit Pv 500 Kwc France 2025
-date: 2026-04-30
-last_updated: 2026-04-30
+date: 2026-05-01
+last_updated: 2026-05-01
 wordcount: 13
 robots: noindex
 ---
