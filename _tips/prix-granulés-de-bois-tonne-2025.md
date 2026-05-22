@@ -1,7 +1,7 @@
 ---
 title: Prix Granulés De Bois Tonne 2025
-date: 2026-05-21
-last_updated: 2026-05-21
+date: 2026-05-22
+last_updated: 2026-05-22
 wordcount: 12
 robots: noindex
 ---
