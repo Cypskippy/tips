@@ -1,7 +1,7 @@
 ---
 title: Aide Climatisation Split 2025
-date: 2026-05-31
-last_updated: 2026-05-31
+date: 2026-06-01
+last_updated: 2026-06-01
 wordcount: 10
 robots: noindex
 ---

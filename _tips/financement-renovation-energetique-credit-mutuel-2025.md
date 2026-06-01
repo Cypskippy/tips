@@ -1,7 +1,7 @@
 ---
 title: Financement Renovation Energetique Credit Mutuel 2025
-date: 2026-05-31
-last_updated: 2026-05-31
+date: 2026-06-01
+last_updated: 2026-06-01
 wordcount: 12
 robots: noindex
 ---
