@@ -1,7 +1,7 @@
 ---
 title: Vitrage Phonique 37Db Prix 2025
-date: 2026-06-01
-last_updated: 2026-06-01
+date: 2026-06-02
+last_updated: 2026-06-02
 wordcount: 11
 robots: noindex
 ---
