@@ -1,7 +1,7 @@
 ---
 title: Climatisation Consommation Moyenne 100M2 2025
-date: 2026-06-08
-last_updated: 2026-06-08
+date: 2026-06-09
+last_updated: 2026-06-09
 wordcount: 11
 robots: noindex
 ---
