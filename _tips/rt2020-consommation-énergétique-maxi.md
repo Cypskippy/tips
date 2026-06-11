@@ -1,7 +1,7 @@
 ---
 title: Rt2020 Consommation Énergétique Maxi
-date: 2026-06-10
-last_updated: 2026-06-10
+date: 2026-06-11
+last_updated: 2026-06-11
 wordcount: 10
 robots: noindex
 ---
