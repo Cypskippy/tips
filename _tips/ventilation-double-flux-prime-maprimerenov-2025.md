@@ -1,7 +1,7 @@
 ---
 title: Ventilation Double Flux Prime Maprimerenov 2025
-date: 2026-06-21
-last_updated: 2026-06-21
+date: 2026-06-22
+last_updated: 2026-06-22
 wordcount: 12
 robots: noindex
 ---
