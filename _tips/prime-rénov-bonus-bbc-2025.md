@@ -1,7 +1,7 @@
 ---
 title: Prime Rénov Bonus Bbc 2025
-date: 2026-06-22
-last_updated: 2026-06-22
+date: 2026-06-23
+last_updated: 2026-06-23
 wordcount: 11
 robots: noindex
 ---

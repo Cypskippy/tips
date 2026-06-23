@@ -1,7 +1,7 @@
 ---
 title: Aide Audit Energetique Obligatoire Vente 2025
-date: 2026-06-22
-last_updated: 2026-06-22
+date: 2026-06-23
+last_updated: 2026-06-23
 wordcount: 12
 robots: noindex
 ---
