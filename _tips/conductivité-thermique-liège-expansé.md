@@ -1,7 +1,7 @@
 ---
 title: Conductivité Thermique Liège Expansé
-date: 2026-06-27
-last_updated: 2026-06-27
+date: 2026-06-28
+last_updated: 2026-06-28
 wordcount: 10
 robots: noindex
 ---
