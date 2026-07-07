@@ -1,7 +1,7 @@
 ---
 title: Taux Tva 5.5 Renovation 2025
-date: 2026-07-06
-last_updated: 2026-07-06
+date: 2026-07-07
+last_updated: 2026-07-07
 wordcount: 11
 robots: noindex
 ---
