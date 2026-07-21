@@ -1,7 +1,7 @@
 ---
 title: Prime Chauffe Eau Solaire Individuel 2025
-date: 2026-07-20
-last_updated: 2026-07-20
+date: 2026-07-21
+last_updated: 2026-07-21
 wordcount: 12
 robots: noindex
 ---
