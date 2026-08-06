@@ -1,7 +1,7 @@
 ---
 title: Artisan Rge Panneau Solaire Auvergne 2025
-date: 2026-08-05
-last_updated: 2026-08-05
+date: 2026-08-06
+last_updated: 2026-08-06
 wordcount: 12
 robots: noindex
 ---
