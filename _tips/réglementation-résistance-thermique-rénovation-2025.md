@@ -1,7 +1,7 @@
 ---
 title: Réglementation Résistance Thermique Rénovation 2025
-date: 2026-08-18
-last_updated: 2026-08-18
+date: 2026-08-19
+last_updated: 2026-08-19
 wordcount: 11
 robots: noindex
 ---
