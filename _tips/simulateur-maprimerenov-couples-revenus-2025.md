@@ -1,7 +1,7 @@
 ---
 title: Simulateur Maprimerenov Couples Revenus 2025
-date: 2026-09-11
-last_updated: 2026-09-11
+date: 2026-09-12
+last_updated: 2026-09-12
 wordcount: 11
 robots: noindex
 ---
