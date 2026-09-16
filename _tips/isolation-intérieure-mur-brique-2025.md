@@ -1,7 +1,7 @@
 ---
 title: Isolation Intérieure Mur Brique 2025
-date: 2026-09-15
-last_updated: 2026-09-15
+date: 2026-09-16
+last_updated: 2026-09-16
 wordcount: 11
 robots: noindex
 ---
