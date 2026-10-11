@@ -1,7 +1,7 @@
 ---
 title: Interdiction Location Logement Classe F 2028
-date: 2026-10-10
-last_updated: 2026-10-10
+date: 2026-10-11
+last_updated: 2026-10-11
 wordcount: 12
 robots: noindex
 ---
