@@ -1,7 +1,7 @@
 ---
 title: Vmi Ventilation Mecanique Insuflée Avis 2025
-date: 2026-10-16
-last_updated: 2026-10-16
+date: 2026-10-17
+last_updated: 2026-10-17
 wordcount: 12
 robots: noindex
 ---
