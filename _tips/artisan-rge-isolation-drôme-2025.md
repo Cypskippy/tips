@@ -1,7 +1,7 @@
 ---
 title: Artisan Rge Isolation Drôme 2025
-date: 2026-10-18
-last_updated: 2026-10-18
+date: 2026-10-19
+last_updated: 2026-10-19
 wordcount: 11
 robots: noindex
 ---
