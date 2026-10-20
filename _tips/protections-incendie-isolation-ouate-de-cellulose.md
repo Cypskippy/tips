@@ -1,7 +1,7 @@
 ---
 title: Protections Incendie Isolation Ouate De Cellulose
-date: 2026-10-19
-last_updated: 2026-10-19
+date: 2026-10-20
+last_updated: 2026-10-20
 wordcount: 12
 robots: noindex
 ---
