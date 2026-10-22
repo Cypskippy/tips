@@ -1,7 +1,7 @@
 ---
 title: Isolation Extérieure Enduit Isolant Prix 2025
-date: 2026-10-21
-last_updated: 2026-10-21
+date: 2026-10-22
+last_updated: 2026-10-22
 wordcount: 12
 robots: noindex
 ---
