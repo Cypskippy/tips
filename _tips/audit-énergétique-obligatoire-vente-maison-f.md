@@ -1,7 +1,7 @@
 ---
 title: Audit Énergétique Obligatoire Vente Maison F
-date: 2026-10-24
-last_updated: 2026-10-24
+date: 2026-10-25
+last_updated: 2026-10-25
 wordcount: 12
 robots: noindex
 ---
