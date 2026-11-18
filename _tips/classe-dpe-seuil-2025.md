@@ -1,7 +1,7 @@
 ---
 title: Classe Dpe Seuil 2025
-date: 2026-11-17
-last_updated: 2026-11-17
+date: 2026-11-18
+last_updated: 2026-11-18
 wordcount: 10
 robots: noindex
 ---
