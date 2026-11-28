@@ -1,7 +1,7 @@
 ---
 title: Volet Roulant Solaire Prix Aide
-date: 2026-11-27
-last_updated: 2026-11-27
+date: 2026-11-28
+last_updated: 2026-11-28
 wordcount: 11
 robots: noindex
 ---
